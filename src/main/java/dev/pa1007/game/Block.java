@@ -1,6 +1,6 @@
 package dev.pa1007.game;
 
-public class Block {
+public abstract class Block {
 
 
     /**
