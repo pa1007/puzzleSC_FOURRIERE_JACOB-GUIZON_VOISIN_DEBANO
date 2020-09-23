@@ -25,4 +25,17 @@ public class Puzzle {
     public void setBlocks(List<Block> blocks) {
         this.blocks = blocks;
     }
+
+    /**
+     * Check if puzzle has been solved.
+     *
+     * @return True if the puzzle has been solved and false otherwise.
+     */
+    public boolean isSolved() {
+        for(Block b : blocks) {
+            if(!b.goodPlace())
+                return false;
+        }
+        return true;
+    }
 }
