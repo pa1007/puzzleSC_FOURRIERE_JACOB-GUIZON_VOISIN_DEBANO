@@ -19,9 +19,9 @@ public abstract class Block {
      */
     private Position startPos;
 
-    public Block(int number, Position currentPos) {
+    public Block(int number, Position startPos) {
         this.number = number;
-        this.currentPos = currentPos;
+        this.startPos = startPos;
     }
 
     /**
@@ -80,6 +80,7 @@ public abstract class Block {
     public void setNumber(int number) {
         this.number = number;
     }
+
 
     @Override
     public String toString() {
