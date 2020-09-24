@@ -5,6 +5,7 @@ import dev.pa1007.game.draw.BlockVoid;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Puzzle {
 
@@ -113,21 +114,17 @@ public class Puzzle {
     }
 
     public void initGame(int x, int y) {
+        blocks.remove(blocks.size() - 1);
         Collections.shuffle(blocks);
         this.voidBlock = new BlockVoid(new Position(x - 1, y - 1));
         blocks.add(voidBlock);
         int tot = 0;
-        int max = x * y - 3;
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 blocks.get(tot).setCurrentPos(new Position(i, j));
                 tot++;
-                if (tot == max) {
-                    break;
-                }
             }
         }
-
     }
 
     public String createString() {
@@ -179,4 +176,9 @@ public class Puzzle {
         return sb.toString();
     }
 
+    public List<Block> getAroundVoid() {
+        System.out.println(blocks);
+        List<Position> p = voidBlock.getCurrentPos().getSurrounding();
+        return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(Collectors.toList());
+    }
 }

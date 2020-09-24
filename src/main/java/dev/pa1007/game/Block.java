@@ -85,8 +85,9 @@ public abstract class Block {
     @Override
     public String toString() {
         return "Block{" +
-               "number=" + number +
-               ", currentPos=" + currentPos +
-               '}';
+                "number=" + number +
+                ", currentPos=" + currentPos +
+                ", startPos=" + startPos +
+                '}';
     }
 }
