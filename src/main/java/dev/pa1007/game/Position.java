@@ -1,5 +1,6 @@
 package dev.pa1007.game;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Position {
@@ -51,8 +52,17 @@ public class Position {
     }
 
     public boolean isSup(Position o2) {
-        return x > o2.x && y > o2.y;
+        return x > o2.x || y > o2.y;
     }
+
+    public Position getNear(int x, int y) {
+        return new Position(this.x + x, this.y + y);
+    }
+
+    public List<Position> getSurrounding() {
+        return List.of(getNear(-1, 0), getNear(-1, 1), getNear(0, -1), getNear(1, 0));
+    }
+
 
     @Override
     public boolean equals(Object o) {
