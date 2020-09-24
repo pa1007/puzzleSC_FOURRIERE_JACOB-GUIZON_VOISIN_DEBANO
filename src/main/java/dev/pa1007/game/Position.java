@@ -50,6 +50,10 @@ public class Position {
         this.y = y;
     }
 
+    public boolean isSup(Position o2) {
+        return x > o2.x && y > o2.y;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
