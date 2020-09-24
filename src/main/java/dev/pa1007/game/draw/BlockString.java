@@ -5,8 +5,8 @@ import dev.pa1007.game.Position;
 
 public class BlockString extends Block implements Drawable<StringBuilder> {
 
-    public BlockString(int number, Position currentPos) {
-        super(number, currentPos);
+    public BlockString(int number, Position startPos) {
+        super(number, startPos);
     }
 
     @Override

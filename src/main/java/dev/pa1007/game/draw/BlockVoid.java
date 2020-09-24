@@ -7,5 +7,6 @@ public class BlockVoid extends Block {
 
     public BlockVoid(Position startPos) {
         super(-1, startPos);
+        this.setCurrentPos(startPos);
     }
 }
