@@ -101,7 +101,7 @@ public class Puzzle {
     public void initStringBlock(int x, int y) {
         blocks = new ArrayList<>();
         int pos = 0;
-        int max = x * y - 3;
+        int max = x * y - 2;
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 blocks.add(new BlockString(pos, new Position(i, j)));
@@ -177,7 +177,6 @@ public class Puzzle {
     }
 
     public List<Block> getAroundVoid() {
-        System.out.println(blocks);
         List<Position> p = voidBlock.getCurrentPos().getSurrounding();
         return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(Collectors.toList());
     }
