@@ -5,5 +5,7 @@ import dev.pa1007.game.Position;
 
 public class BlockVoid extends Block {
 
-    public BlockVoid(Position currentPos) { super(0, currentPos); }
+    public BlockVoid(Position startPos) {
+        super(-1, startPos);
+    }
 }
