@@ -60,7 +60,7 @@ public class Position {
     }
 
     public List<Position> getSurrounding() {
-        return List.of(getNear(-1, 0), getNear(-1, 1), getNear(0, -1), getNear(1, 0));
+        return List.of(getNear(-1, 0), getNear(0, 1), getNear(0, -1), getNear(1, 0));
     }
 
 
@@ -88,5 +88,10 @@ public class Position {
                "x=" + x +
                ", y=" + y +
                '}';
+    }
+
+    @Override
+    public Position clone() {
+        return new Position(this.x, this.y);
     }
 }

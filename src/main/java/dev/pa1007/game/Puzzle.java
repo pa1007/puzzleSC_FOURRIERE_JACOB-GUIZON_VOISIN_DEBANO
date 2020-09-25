@@ -5,6 +5,7 @@ import dev.pa1007.game.draw.BlockVoid;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Puzzle {
@@ -92,7 +93,6 @@ public class Puzzle {
         return blocks.stream().allMatch(Block::goodPlace);
     }
 
-
     public void init() {
         initStringBlock(maxX, maxY);
         initGame(maxX, maxY);
@@ -124,6 +124,36 @@ public class Puzzle {
                 blocks.get(tot).setCurrentPos(new Position(i, j));
                 tot++;
             }
+        }
+    }
+
+    public void startGameLine() {
+        Scanner sc = new Scanner(System.in);
+        String s;
+        while(!this.isSolved()) {
+            //System.out.println(this.blocks);
+            System.out.println(this.createString());
+            System.out.println("[g] ← | [d] → | [h] ↑ | [b] ↓");
+            s = sc.nextLine();
+            while(!(s.equals("g") | s.equals("d") | s.equals("h") | s.equals("b"))) {
+                System.out.println("Entrez une valeur correcte");
+                s = sc.nextLine();
+            }
+            switch (s) {
+                case "g" -> move(0, -1);
+                case "d" -> move(0, 1);
+                case "h" -> move(-1, 0);
+                case "b" -> move(1, 0);
+            }
+        }
+    }
+
+    private void move(int x, int y) {
+        Position p = voidBlock.getCurrentPos().getNear(x, y).clone();
+        Block b = blocks.stream().filter(bCur -> bCur.getCurrentPos().equals(p)).findFirst().orElse(null);
+        if(b != null) {
+            b.setCurrentPos(voidBlock.getCurrentPos().clone());
+            voidBlock.setCurrentPos(p);
         }
     }
 
