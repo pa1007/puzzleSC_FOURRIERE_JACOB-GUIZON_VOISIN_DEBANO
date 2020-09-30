@@ -52,7 +52,7 @@ public class Position {
     }
 
     public boolean isSup(Position o2) {
-        return x > o2.x || y > o2.y;
+        return o2.x - x + o2.y - y < 0;
     }
 
     public Position getNear(int x, int y) {
