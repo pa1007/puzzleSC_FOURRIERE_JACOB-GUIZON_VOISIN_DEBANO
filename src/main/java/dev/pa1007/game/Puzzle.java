@@ -101,9 +101,9 @@ public class Puzzle {
     public void initStringBlock(int x, int y) {
         blocks = new ArrayList<>();
         int pos = 0;
-        int max = x * y - 2;
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
+        int max = x * y - 1;
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < x; j++) {
                 blocks.add(new BlockString(pos, new Position(i, j)));
                 pos++;
                 if (pos == max) {
@@ -114,13 +114,12 @@ public class Puzzle {
     }
 
     public void initGame(int x, int y) {
-        blocks.remove(blocks.size() - 1);
         Collections.shuffle(blocks);
         this.voidBlock = new BlockVoid(new Position(x - 1, y - 1));
         blocks.add(voidBlock);
         int tot = 0;
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < x; j++) {
                 blocks.get(tot).setCurrentPos(new Position(i, j));
                 tot++;
             }
@@ -129,31 +128,21 @@ public class Puzzle {
 
     public void startGameLine() {
         Scanner sc = new Scanner(System.in);
-        String s;
-        while(!this.isSolved()) {
-            //System.out.println(this.blocks);
+        String  s;
+        while (!this.isSolved()) {
             System.out.println(this.createString());
-            System.out.println("[g] ← | [d] → | [h] ↑ | [b] ↓");
+            System.out.println("[g] l | [d] → | [h] ↑ | [b] ↓");
             s = sc.nextLine();
-            while(!(s.equals("g") | s.equals("d") | s.equals("h") | s.equals("b"))) {
+            while (!(s.equals("g") || s.equals("d") || s.equals("h") || s.equals("b"))) {
                 System.out.println("Entrez une valeur correcte");
                 s = sc.nextLine();
             }
             switch (s) {
-                case "g" -> move(0, -1);
-                case "d" -> move(0, 1);
-                case "h" -> move(-1, 0);
                 case "b" -> move(1, 0);
+                case "h" -> move(-1, 0);
+                case "d" -> move(0, 1);
+                case "g" -> move(0, -1);
             }
-        }
-    }
-
-    private void move(int x, int y) {
-        Position p = voidBlock.getCurrentPos().getNear(x, y).clone();
-        Block b = blocks.stream().filter(bCur -> bCur.getCurrentPos().equals(p)).findFirst().orElse(null);
-        if(b != null) {
-            b.setCurrentPos(voidBlock.getCurrentPos().clone());
-            voidBlock.setCurrentPos(p);
         }
     }
 
@@ -164,31 +153,47 @@ public class Puzzle {
             int lineNb = 1;
             int lastNbLine = 0;
         };
-        blocks.stream().sorted((o1, o2) -> {
-            if (o1.getCurrentPos().equals(o2.getCurrentPos())) {
-                return 0;
-            }
-            else {
-                return o1.getCurrentPos().isSup(o2.getCurrentPos()) ? 1 : -1;
-            }
-        }).forEach((i) -> {
-            if (ref.lastNbLine != ref.lineNb) {
-                sb.append(makeNumberDoubleDigit(ref.lineNb)).append("|");
-                ref.lastNbLine = ref.lineNb;
-            }
-            int nb = i.getNumber();
-            sb.append(" ").append(makeNumberDoubleDigit(nb));
-            ref.lineF++;
-            if (ref.lineF + 1 > maxY) {
-                sb.append(" \n");
-                ref.lineF = 0;
-                ref.lineNb++;
-            }
+        for (int i = 0; i < maxY; i++) {
+            for (int j = 0; j < maxX; j++) {
+                int finalI = i;
+                int finalJ = j;
+                Block block = blocks.stream().filter(it -> it.getCurrentPos().equals(new Position(
+                        finalI,
+                        finalJ
+                ))).findFirst().get();
+                if (ref.lastNbLine != ref.lineNb) {
+                    sb.append(makeNumberDoubleDigit(ref.lineNb)).append("|");
+                    ref.lastNbLine = ref.lineNb;
+                }
+                int nb = block.getNumber();
+                sb.append(" ").append(makeNumberDoubleDigit(nb));
+                ref.lineF++;
+                if (ref.lineF + 1 > maxX) {
+                    sb.append(" \n");
+                    ref.lineF = 0;
+                    ref.lineNb++;
+                }
 
-        });
+            }
+        }
 
         return sb.toString();
 
+    }
+
+    public List<Block> getAroundVoid() {
+        List<Position> p = voidBlock.getCurrentPos().getSurrounding();
+        return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(
+                Collectors.toList());
+    }
+
+    private void move(int x, int y) {
+        Position p = voidBlock.getCurrentPos().getNear(x, y).clone();
+        Block    b = blocks.stream().filter(bCur -> bCur.getCurrentPos().equals(p)).findFirst().orElse(null);
+        if (b != null) {
+            b.setCurrentPos(voidBlock.getCurrentPos().clone());
+            voidBlock.setCurrentPos(p);
+        }
     }
 
     private String makeNumberDoubleDigit(int nb) {
@@ -198,16 +203,11 @@ public class Puzzle {
     private String getPremiereLigne() {
         char[]        alpha = "abcdefghijklmnopqrstuvwxyz".toUpperCase().toCharArray();
         StringBuilder sb    = new StringBuilder("    ");
-        int           t     = maxY;
+        int           t     = maxX;
         for (int i = 0; i < t; i++) {
             sb.append(" ").append(alpha[i]).append(" ");
         }
         sb.append("\n");
         return sb.toString();
-    }
-
-    public List<Block> getAroundVoid() {
-        List<Position> p = voidBlock.getCurrentPos().getSurrounding();
-        return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(Collectors.toList());
     }
 }
