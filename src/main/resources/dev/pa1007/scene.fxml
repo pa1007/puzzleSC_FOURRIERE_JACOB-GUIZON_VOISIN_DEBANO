@@ -1,12 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainG" maxHeight="-Infinity" maxWidth="-Infinity"
+          minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0"
+          xmlns="http://javafx.com/javafx/8" fx:controller="dev.pa1007.controller.MainController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="286.0" minHeight="10.0" prefHeight="286.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <GridPane fx:id="gameG" hgap="6.0" prefHeight="138.0" prefWidth="600.0" vgap="6.0" GridPane.rowIndex="1">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+    </GridPane>
+    <BorderPane prefHeight="200.0" prefWidth="200.0">
+        <top>
+            <MenuBar AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                     AnchorPane.topAnchor="0.0">
+                <Menu text="Game">
+                    <MenuItem mnemonicParsing="false" onAction="#newGameHandler" text="New game">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-           minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
-           fx:controller="dev.pa1007.FXMLController">
-    <children>
-        <Label fx:id="label" text="Label"/>
-    </children>
-</StackPane>
+                    <MenuItem mnemonicParsing="false" onAction="#loadGameHandler" text="Load game">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" onAction="#saveGameHandler" text="Save game as ...">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
+                    <SeparatorMenuItem/>
+                    <Menu text="AI">
+                        <MenuItem fx:id="startAIItem" disable="true" mnemonicParsing="false"
+                                  onAction="#startAIHandler" text="Start">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="A" control="UP" meta="UP"
+                                                    shift="DOWN" shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="stopAIItem" disable="true" mnemonicParsing="false"
+                                  onAction="#stopAIHandler" text="Stop">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="I" control="UP" meta="UP"
+                                                    shift="DOWN" shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem/>
+                        <MenuItem disable="true" mnemonicParsing="false" onAction="#nextMoveAIHandler"
+                                  text="Predict next move">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="M" control="UP" meta="UP"
+                                                    shift="DOWN" shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem/>
+                        <MenuItem disable="true" mnemonicParsing="false" onAction="#changeAIHandler"
+                                  text="Change AI algorithm"/>
+                    </Menu>
+                </Menu>
+                <Menu text="Leaderboard">
+                    <MenuItem mnemonicParsing="false" onAction="#leaderboardShowHandler" text="Show">
+                        <accelerator>
+                            <KeyCodeCombination alt="DOWN" code="L" control="UP" meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <MenuItem mnemonicParsing="false" onAction="#htpHandler" text="How to play">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="H" control="UP" meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" onAction="#aboutHandler" text="About"/>
+                </Menu>
+            </MenuBar>
+        </top>
+        <center>
+            <Text fx:id="clock" layoutX="275.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00"
+                  wrappingWidth="49.13671875" AnchorPane.bottomAnchor="10.98046875"
+                  AnchorPane.rightAnchor="275.86328125" AnchorPane.topAnchor="37.41796875">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Text>
+        </center>
+    </BorderPane>
+</GridPane>
