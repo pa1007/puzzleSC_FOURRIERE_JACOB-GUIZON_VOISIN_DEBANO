@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainG" maxHeight="-Infinity" maxWidth="-Infinity"
-          minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0"
+          minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" onKeyPressed="#onKeyPressed"
           xmlns="http://javafx.com/javafx/11.0.1" fx:controller="dev.pa1007.controller.MainController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0"/>
@@ -14,9 +14,9 @@
     <rowConstraints>
         <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="286.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-    <GridPane fx:id="gameG" hgap="6.0" prefWidth="600.0" vgap="6.0" GridPane.rowIndex="1">
+    <GridPane fx:id="gameG" hgap="2.0" prefWidth="600.0" vgap="2.0" GridPane.rowIndex="1">
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
