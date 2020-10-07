@@ -1,7 +1,7 @@
 package dev.pa1007;
 
 import dev.pa1007.controller.MainController;
-import dev.pa1007.game.Puzzle;
+import dev.pa1007.game.PuzzleGraphic;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +15,8 @@ public class MainApp extends Application {
         FXMLLoader     loader     = new FXMLLoader(getClass().getResource("scene.fxml"));
         Parent         root       = loader.load();
         MainController controller = loader.getController();
-        Puzzle         game       = new Puzzle(15, 10);
-        game.init();
-        System.out.println(game.createString());
+        PuzzleGraphic  game       = new PuzzleGraphic(15, 12);
+        game.initImage();
         controller.setGame(game);
         Scene scene = new Scene(root);
         stage.setTitle("Taquin");
@@ -25,6 +24,7 @@ public class MainApp extends Application {
         // scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
+        root.requestFocus();
     }
 
     public static void main(String[] args) {
