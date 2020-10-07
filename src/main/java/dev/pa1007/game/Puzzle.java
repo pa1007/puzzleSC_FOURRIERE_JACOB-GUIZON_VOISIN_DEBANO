@@ -14,22 +14,22 @@ public class Puzzle {
     /**
      * The list of main blocks in the puzzle game.
      */
-    private List<Block> blocks;
+    protected List<Block> blocks;
 
 
     /**
      * The max X.
      */
-    private int maxX;
+    protected int maxX;
 
 
     /**
      * The min Y.
      */
-    private int maxY;
+    protected int maxY;
 
 
-    private BlockVoid voidBlock;
+    protected BlockVoid voidBlock;
 
     public Puzzle(int maxX, int maxY) {
         this.maxX = maxX;
