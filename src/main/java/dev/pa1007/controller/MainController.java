@@ -1,6 +1,6 @@
 package dev.pa1007.controller;
 
-import dev.pa1007.game.Puzzle;
+import dev.pa1007.game.PuzzleGraphic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -12,7 +12,8 @@ import javafx.scene.text.Text;
 
 public class MainController {
 
-    private Puzzle   game;
+    private PuzzleGraphic game;
+
     @FXML
     private MenuItem startAIItem;
     @FXML
@@ -25,7 +26,7 @@ public class MainController {
     private GridPane gameG;
 
 
-    public void setGame(Puzzle game) {
+    public void setGame(PuzzleGraphic game) {
         this.game = game;
         initGame();
     }
@@ -96,7 +97,7 @@ public class MainController {
         for (int i = 0; i < game.getMaxX() - 1; i++) {
             gameG.getColumnConstraints().add(columnConstraints);
         }
-        gameG.setGridLinesVisible(true);
+        game.update(gameG);
     }
 
 
