@@ -11,11 +11,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PuzzleGraphic extends Puzzle {
 
     public PuzzleGraphic(int maxX, int maxY) {
         super(maxX, maxY);
+    }
+
+    @Override
+    public void init() {
+
     }
 
 
@@ -72,7 +78,7 @@ public class PuzzleGraphic extends Puzzle {
     }
 
     private void initGameGraph() {
-        //Collections.shuffle(blocks);
+        Collections.shuffle(blocks);
         this.voidBlock = new BlockVoid(new Position(maxX - 1, maxY - 1));
         blocks.add(voidBlock);
         int tot = 0;
