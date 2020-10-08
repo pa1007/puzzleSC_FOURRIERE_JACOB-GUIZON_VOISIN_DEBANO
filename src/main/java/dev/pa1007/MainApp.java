@@ -15,7 +15,7 @@ public class MainApp extends Application {
         FXMLLoader     loader     = new FXMLLoader(getClass().getResource("scene.fxml"));
         Parent         root       = loader.load();
         MainController controller = loader.getController();
-        PuzzleGraphic  game       = new PuzzleGraphic(15, 12);
+        PuzzleGraphic  game       = new PuzzleGraphic(4, 4);
         game.initImage();
         controller.setGame(game);
         Scene scene = new Scene(root);

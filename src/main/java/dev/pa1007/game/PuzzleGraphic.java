@@ -5,8 +5,11 @@ import dev.pa1007.game.draw.BlockGraphic;
 import dev.pa1007.game.draw.BlockVoid;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javax.imageio.ImageIO;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -32,25 +35,36 @@ public class PuzzleGraphic extends Puzzle {
     }
 
     public void initGraphicBlock(String path) throws IOException {
-        BufferedImage read = ImageIO.read(new File(path));
-        int           h    = read.getHeight() / maxX - 2;
-        int           w    = read.getWidth() / maxY - 2;
-        System.out.println(h);
-        System.out.println(maxX);
-        System.out.println(w);
-        System.out.println(maxY);
+        int width  = 600;
+        int height = 600;
+        Image scaledInstance = ImageIO.read(new File(path)).getScaledInstance(
+                width,
+                height,
+                Image.SCALE_DEFAULT
+        );
+        BufferedImage read = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        read.getGraphics().drawImage(scaledInstance, 0, 0, null);
+        int h   = read.getHeight() / maxX - 1;
+        int w   = read.getWidth() / maxY - 1;
         int nb  = 0;
         int max = (maxX * maxY) - 1;
-        for (int j = 0; j < read.getWidth() - w && nb != max; j += w) {
-            for (int i = 0; i < read.getHeight() - h; i += h) {
-                blocks.add(new BlockGraphic(nb, new Position(j / w, i / h), read.getSubimage(i, j, w, h)));
+        for (int j = 0; j < width && nb != max; j += w) {
+            for (int i = 0; i < height; i += h) {
+                int dh = h;
+                if (i + w > read.getWidth()) {
+                   continue;
+                }
+                if (j + h > read.getHeight()) {
+                    dh = read.getHeight() - j;
+                }
+                blocks.add(new BlockGraphic(nb, new Position(j / w, i / h), read.getSubimage(i, j, w, dh)));
                 nb++;
                 if (nb == max) {
                     break;
                 }
             }
         }
-        System.out.println(blocks);
+
     }
 
     public void update(GridPane gameG) {
@@ -65,16 +79,15 @@ public class PuzzleGraphic extends Puzzle {
                 ImageView child;
                 if (block instanceof BlockVoid) {
                     child = new ImageView(SwingFXUtils.toFXImage(((BlockVoid) block).getImage(), null));
+                    child.setFitHeight(50);
+                    child.setFitWidth(50);
                 }
                 else {
-                    child = new ImageView(SwingFXUtils.toFXImage(((BlockGraphic) block).getImage(), null));
+                    child = new ImageView(convertToFxImage(((BlockGraphic) block).getImage()));
                 }
-                child.setFitHeight(50);
-                child.setFitWidth(50);
                 gameG.add(child, j, i);
             }
         }
-
     }
 
     private void initGameGraph() {
@@ -90,5 +103,25 @@ public class PuzzleGraphic extends Puzzle {
         }
     }
 
+    /**
+     * This method is a fix for a bug we got from SwingFXUtils.toFXImage, a new object was not created and everyting was not working properly
+     *
+     * @param image an image to convert
+     * @return a javafx image
+     */
+    private static javafx.scene.image.Image convertToFxImage(BufferedImage image) {
+        WritableImage wr = null;
+        if (image != null) {
+            wr = new WritableImage(image.getWidth(), image.getHeight());
+            PixelWriter pw = wr.getPixelWriter();
+            for (int x = 0; x < image.getWidth(); x++) {
+                for (int y = 0; y < image.getHeight(); y++) {
+                    pw.setArgb(x, y, image.getRGB(x, y));
+                }
+            }
+        }
+
+        return new ImageView(wr).getImage();
+    }
 
 }
