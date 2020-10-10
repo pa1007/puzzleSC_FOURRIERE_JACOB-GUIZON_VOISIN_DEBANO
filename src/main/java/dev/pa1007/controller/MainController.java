@@ -1,6 +1,7 @@
 package dev.pa1007.controller;
 
 import dev.pa1007.game.PuzzleGraphic;
+import dev.pa1007.game.draw.StopwatchTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -13,6 +14,7 @@ import javafx.scene.text.Text;
 public class MainController {
 
     private PuzzleGraphic game;
+    private StopwatchTimer stopwatchTimer;
 
     @FXML
     private MenuItem startAIItem;
