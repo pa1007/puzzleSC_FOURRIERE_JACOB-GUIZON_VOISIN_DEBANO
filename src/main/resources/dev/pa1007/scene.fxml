@@ -73,6 +73,11 @@
                         <MenuItem disable="true" mnemonicParsing="false" onAction="#changeAIHandler"
                                   text="Change AI algorithm"/>
                     </Menu>
+                    <MenuItem fx:id="menuQuit" mnemonicParsing="false" onAction="#quit" text="Quit">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
                 </Menu>
                 <Menu text="Leaderboard">
                     <MenuItem mnemonicParsing="false" onAction="#leaderboardShowHandler" text="Show">

@@ -2,6 +2,7 @@ package dev.pa1007.controller;
 
 import dev.pa1007.game.PuzzleGraphic;
 import dev.pa1007.game.draw.StopwatchTimer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -52,6 +53,11 @@ public class MainController {
     @FXML
     void saveGameHandler(ActionEvent event) {
 
+    }
+
+    @FXML
+    public void quit(ActionEvent event) {
+        Platform.exit();
     }
 
     @FXML
