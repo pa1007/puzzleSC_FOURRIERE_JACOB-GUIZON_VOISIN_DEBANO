@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -36,7 +37,15 @@ public class MainController {
 
     @FXML
     void onKeyPressed(KeyEvent event) {
-
+        switch(event.getCode()){
+            case DOWN -> this.game.move(1, 0);
+            case UP -> this.game.move(-1, 0);
+            case RIGHT -> this.game.move(0, 1);
+            case LEFT -> this.game.move(0, -1);
+        }
+        if(event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.UP || event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.RIGHT) {
+            this.game.update(this.gameG);
+        }
     }
 
     //Menu handler start
