@@ -24,15 +24,16 @@ public class PuzzleGraphic extends Puzzle {
 
     @Override
     public void init() {
-
-    }
-
-
-    public void initImage() throws IOException {
         blocks = new ArrayList<>();
-        initGraphicBlock(Test.class.getResource("images/test.jpg").getFile());
-        initGameGraph();
+        try {
+            initGraphicBlock(Test.class.getResource("images/test.jpg").getFile());
+            initGameGraph();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public void initGraphicBlock(String path) throws IOException {
         int width  = 600;
@@ -52,7 +53,7 @@ public class PuzzleGraphic extends Puzzle {
             for (int i = 0; i < height; i += h) {
                 int dh = h;
                 if (i + w > read.getWidth()) {
-                   continue;
+                    continue;
                 }
                 if (j + h > read.getHeight()) {
                     dh = read.getHeight() - j;
@@ -68,6 +69,7 @@ public class PuzzleGraphic extends Puzzle {
     }
 
     public void update(GridPane gameG) {
+        gameG.getChildren().clear();
         for (int i = 0; i < maxY; i++) {
             for (int j = 0; j < maxX; j++) {
                 int finalI = i;

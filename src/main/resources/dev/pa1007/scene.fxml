@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainG" maxHeight="-Infinity" maxWidth="-Infinity"
-          minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" onKeyPressed="#onKeyPressed"
+          minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0"
           xmlns="http://javafx.com/javafx/11.0.1" fx:controller="dev.pa1007.controller.MainController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0"/>
@@ -18,7 +18,7 @@
     </rowConstraints>
     <GridPane fx:id="gameG" hgap="2.0" prefWidth="600.0" vgap="2.0" GridPane.rowIndex="1">
         <columnConstraints>
-            <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
         </columnConstraints>
         <rowConstraints>
             <RowConstraints percentHeight="50" vgrow="ALWAYS"/>
@@ -43,6 +43,12 @@
                     <MenuItem mnemonicParsing="false" onAction="#saveGameHandler" text="Save game as ...">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
+                    <SeparatorMenuItem/>
+                    <MenuItem mnemonicParsing="false" onAction="#stopTimer" text="Stop timer">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="DOWN" shortcut="UP"/>
                         </accelerator>
                     </MenuItem>
                     <SeparatorMenuItem/>
@@ -97,8 +103,8 @@
             </MenuBar>
         </top>
         <center>
-            <Text fx:id="clock" layoutX="275.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00"
-                  wrappingWidth="49.13671875" AnchorPane.bottomAnchor="10.98046875"
+            <Text fx:id="clock" layoutX="275.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="    00:00"
+                  wrappingWidth="92.13671875" AnchorPane.bottomAnchor="10.98046875"
                   AnchorPane.rightAnchor="275.86328125" AnchorPane.topAnchor="37.41796875">
                 <font>
                     <Font size="20.0"/>

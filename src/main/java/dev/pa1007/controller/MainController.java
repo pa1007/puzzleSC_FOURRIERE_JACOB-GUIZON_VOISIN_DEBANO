@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 
 public class MainController {
 
-    private PuzzleGraphic game;
+    private PuzzleGraphic  game;
     private StopwatchTimer stopwatchTimer;
 
     @FXML
@@ -35,16 +35,29 @@ public class MainController {
         initGame();
     }
 
+    public void stopTimer(ActionEvent actionEvent) {
+        game.stopTimer();
+    }
+
+    @FXML
+    public void quit(ActionEvent event) {
+        Platform.exit();
+    }
+
     @FXML
     void onKeyPressed(KeyEvent event) {
-        switch(event.getCode()){
+        switch (event.getCode()) {
             case DOWN -> this.game.move(1, 0);
             case UP -> this.game.move(-1, 0);
             case RIGHT -> this.game.move(0, 1);
             case LEFT -> this.game.move(0, -1);
         }
-        if(event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.UP || event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.RIGHT) {
+        if (event.getCode() == KeyCode.DOWN
+            || event.getCode() == KeyCode.UP
+            || event.getCode() == KeyCode.LEFT
+            || event.getCode() == KeyCode.RIGHT) {
             this.game.update(this.gameG);
+            game.startTimer(clock);
         }
     }
 
@@ -62,11 +75,6 @@ public class MainController {
     @FXML
     void saveGameHandler(ActionEvent event) {
 
-    }
-
-    @FXML
-    public void quit(ActionEvent event) {
-        Platform.exit();
     }
 
     @FXML
@@ -117,10 +125,5 @@ public class MainController {
         game.update(gameG);
     }
 
-
-    private void placeBlock() {
-
-
-    }
 
 }

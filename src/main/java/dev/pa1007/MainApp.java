@@ -16,11 +16,12 @@ public class MainApp extends Application {
         Parent         root       = loader.load();
         MainController controller = loader.getController();
         PuzzleGraphic  game       = new PuzzleGraphic(4, 4);
-        game.initImage();
+        game.init();
         controller.setGame(game);
         Scene scene = new Scene(root);
         stage.setTitle("Taquin");
-        stage.setMinWidth(250);
+        stage.setMinWidth(625);
+        stage.setMinHeight(775);
         // scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();

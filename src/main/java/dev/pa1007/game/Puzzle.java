@@ -1,12 +1,9 @@
 package dev.pa1007.game;
 
-import dev.pa1007.game.draw.BlockString;
 import dev.pa1007.game.draw.BlockVoid;
-import java.util.ArrayList;
-import java.util.Collections;
+import dev.pa1007.game.draw.StopwatchTimer;
+import javafx.scene.text.Text;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public abstract class Puzzle {
 
@@ -26,14 +23,47 @@ public abstract class Puzzle {
     /**
      * The min Y.
      */
-    protected int maxY;
-
-
+    protected int       maxY;
     protected BlockVoid voidBlock;
+
+    /**
+     * the timer.
+     */
+    private StopwatchTimer timer;
 
     public Puzzle(int maxX, int maxY) {
         this.maxX = maxX;
         this.maxY = maxY;
+        timer = new StopwatchTimer();
+    }
+
+    /**
+     * @return the timer.
+     */
+    public StopwatchTimer getTimer() {
+        return this.timer;
+    }
+
+
+    public void startTimer(Text clock) {
+        if (!timer.isInterrupted() && !timer.isAlive()) {
+            timer.setText(clock);
+            timer.startTimer(0);
+        }
+        else if (timer.isInterrupted()) {
+            restartTimer(clock);
+        }
+    }
+
+    public void stopTimer() {
+        timer.stopTimer(timer.getTime());
+    }
+
+    public void restartTimer(Text clock) {
+        long t = timer.getTime();
+        timer = new StopwatchTimer();
+        timer.setText(clock);
+        timer.startTimer(t);
     }
 
     /**
