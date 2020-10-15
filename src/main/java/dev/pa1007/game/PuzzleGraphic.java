@@ -1,6 +1,6 @@
 package dev.pa1007.game;
 
-import dev.pa1007.Test;
+import dev.pa1007.MainApp;
 import dev.pa1007.game.draw.BlockGraphic;
 import dev.pa1007.game.draw.BlockVoid;
 import javafx.embed.swing.SwingFXUtils;
@@ -13,6 +13,10 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -26,7 +30,7 @@ public class PuzzleGraphic extends Puzzle {
     public void init() {
         blocks = new ArrayList<>();
         try {
-            initGraphicBlock(Test.class.getResource("images/test.jpg").getFile());
+            initGraphicBlock(URLDecoder.decode(MainApp.class.getResource("images/test.jpg").getPath(), StandardCharsets.UTF_8));
             initGameGraph();
         }
         catch (IOException e) {
@@ -38,6 +42,7 @@ public class PuzzleGraphic extends Puzzle {
     public void initGraphicBlock(String path) throws IOException {
         int width  = 600;
         int height = 600;
+        System.out.println(path);
         Image scaledInstance = ImageIO.read(new File(path)).getScaledInstance(
                 width,
                 height,
@@ -65,7 +70,6 @@ public class PuzzleGraphic extends Puzzle {
                 }
             }
         }
-
     }
 
     public void update(GridPane gameG) {
