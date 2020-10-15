@@ -59,6 +59,9 @@ public class MainController {
             this.game.update(this.gameG);
             game.startTimer(clock);
         }
+        if(this.game.isSolved()) {
+            this.game.stopTimer();
+        }
     }
 
     //Menu handler start
