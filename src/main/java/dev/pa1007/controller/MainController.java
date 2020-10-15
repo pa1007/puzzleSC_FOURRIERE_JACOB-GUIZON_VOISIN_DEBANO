@@ -5,11 +5,13 @@ import dev.pa1007.game.draw.StopwatchTimer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 
@@ -107,12 +109,29 @@ public class MainController {
 
     @FXML
     void htpHandler(ActionEvent event) {
-
+        Alert alertHtp = new Alert(Alert.AlertType.INFORMATION);
+        alertHtp.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alertHtp.setTitle("How To Play");
+        alertHtp.setHeaderText("Regles du jeu");
+        alertHtp.setResizable(true);
+        String content = String.format("But du jeu : \n" +
+                "Sur un plateau de 16 cases, il faut replacer, en les glissant, 15 pions dans le bon ordre avec le moins de mouvements possibles. Un click sur le bouton [New Game] melange les pions. Avec la souris, cliquez sur le pion que vous voulez deplacer vers la case libre.Au clavier, utilisez les fleches pour effectuer les deplacements");
+        alertHtp.setContentText(content);
+        alertHtp.showAndWait();
     }
 
     @FXML
     void aboutHandler(ActionEvent event) {
-
+        Alert alertAbout = new Alert(Alert.AlertType.INFORMATION);
+        alertAbout.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alertAbout.setTitle("About");
+        alertAbout.setResizable(true);
+        alertAbout.setHeaderText("About");
+        String content = String.format("Java version : 14 \n" +
+                "Auteur : Paul-Alexandre FOURRIERE | Paul DEBANO | Louis VOISIN | Amelie JACOB--GUIZON \n" +
+                "Produit dans le cadre du cours Ingenierie logiciel de L3 MIASHS SC");
+        alertAbout.setContentText(content);
+        alertAbout.showAndWait();
     }
     //Menu handler stop
 
