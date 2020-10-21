@@ -4,9 +4,11 @@ import dev.pa1007.MainApp;
 import dev.pa1007.game.draw.BlockGraphic;
 import dev.pa1007.game.draw.BlockVoid;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javax.imageio.ImageIO;
 import java.awt.Image;
@@ -19,6 +21,8 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PuzzleGraphic extends Puzzle {
 
@@ -74,6 +78,7 @@ public class PuzzleGraphic extends Puzzle {
 
     public void update(GridPane gameG) {
         gameG.getChildren().clear();
+        List<Block> posVoid = this.getAroundVoid();
         for (int i = 0; i < maxY; i++) {
             for (int j = 0; j < maxX; j++) {
                 int finalI = i;
@@ -90,6 +95,15 @@ public class PuzzleGraphic extends Puzzle {
                 }
                 else {
                     child = new ImageView(convertToFxImage(((BlockGraphic) block).getImage()));
+                    if(posVoid.contains(block)) {
+                        EventHandler<? super MouseEvent> eventHandler = (EventHandler<MouseEvent>) event -> {
+                            Position b = posVoid.get(posVoid.indexOf(block)).getCurrentPos().clone();
+                            block.setCurrentPos(voidBlock.getCurrentPos().clone());
+                            voidBlock.setCurrentPos(b);
+                            update(gameG);
+                        };
+                        child.setOnMouseClicked(eventHandler);
+                    }
                 }
                 gameG.add(child, j, i);
             }
@@ -128,6 +142,11 @@ public class PuzzleGraphic extends Puzzle {
         }
 
         return new ImageView(wr).getImage();
+    }
+
+    public List<Block> getAroundVoid() {
+        List<Position> p = voidBlock.getCurrentPos().getSurrounding();
+        return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(Collectors.toList());
     }
 
 }
