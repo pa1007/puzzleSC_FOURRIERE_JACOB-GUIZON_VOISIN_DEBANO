@@ -59,7 +59,7 @@ public class MainController {
             || event.getCode() == KeyCode.UP
             || event.getCode() == KeyCode.LEFT
             || event.getCode() == KeyCode.RIGHT) {
-            this.game.update(this.gameG);
+            this.game.update(this.gameG, this.clock);
             game.startTimer(clock);
         }
         if(this.game.isSolved()) {
@@ -75,7 +75,7 @@ public class MainController {
         game1.init();
         game.stopTimer();
         this.game = game1;
-        game.update(gameG);
+        game.update(gameG, clock);
 
     }
 
@@ -151,7 +151,7 @@ public class MainController {
         for (int i = 0; i < game.getMaxX() - 1; i++) {
             gameG.getColumnConstraints().add(columnConstraints);
         }
-        game.update(gameG);
+        game.update(gameG, clock);
     }
 
 

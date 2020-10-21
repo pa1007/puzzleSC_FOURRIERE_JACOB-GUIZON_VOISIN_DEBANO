@@ -10,6 +10,8 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
+
 import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -76,7 +78,7 @@ public class PuzzleGraphic extends Puzzle {
         }
     }
 
-    public void update(GridPane gameG) {
+    public void update(GridPane gameG, Text clock) {
         gameG.getChildren().clear();
         List<Block> posVoid = this.getAroundVoid();
         for (int i = 0; i < maxY; i++) {
@@ -100,7 +102,8 @@ public class PuzzleGraphic extends Puzzle {
                             Position b = posVoid.get(posVoid.indexOf(block)).getCurrentPos().clone();
                             block.setCurrentPos(voidBlock.getCurrentPos().clone());
                             voidBlock.setCurrentPos(b);
-                            update(gameG);
+                            startTimer(clock);
+                            update(gameG, clock);
                         };
                         child.setOnMouseClicked(eventHandler);
                     }
