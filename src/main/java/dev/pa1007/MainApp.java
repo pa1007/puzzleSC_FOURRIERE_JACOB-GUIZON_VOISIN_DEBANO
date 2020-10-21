@@ -36,6 +36,20 @@ public class MainApp extends Application {
         root.requestFocus();
     }
 
+    public static String encodeUriFromHeader(String uri) {
+        StringBuilder sb = new StringBuilder();
+
+        for(char ch : uri.toCharArray()) {
+            if(ch < (char)128) {
+                sb.append(ch);
+            } else {
+                sb.append(String.format("%%%02X", (int)ch));
+            }
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

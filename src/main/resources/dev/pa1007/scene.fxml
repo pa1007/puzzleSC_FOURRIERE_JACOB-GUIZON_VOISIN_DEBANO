@@ -46,7 +46,7 @@
                         </accelerator>
                     </MenuItem>
                     <SeparatorMenuItem/>
-                    <MenuItem mnemonicParsing="false" onAction="#stopTimer" text="Stop timer">
+                    <MenuItem mnemonicParsing="false" onAction="#stopTimer" text="Pause">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="DOWN" shortcut="UP"/>
                         </accelerator>

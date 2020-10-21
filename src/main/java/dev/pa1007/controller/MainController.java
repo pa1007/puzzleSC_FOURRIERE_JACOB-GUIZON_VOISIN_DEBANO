@@ -1,5 +1,6 @@
 package dev.pa1007.controller;
 
+import dev.pa1007.game.Puzzle;
 import dev.pa1007.game.PuzzleGraphic;
 import dev.pa1007.game.draw.StopwatchTimer;
 import javafx.application.Platform;
@@ -69,6 +70,12 @@ public class MainController {
     //Menu handler start
     @FXML
     void newGameHandler(ActionEvent event) {
+        gameG.getChildren().clear();
+        PuzzleGraphic game1 = new PuzzleGraphic(4, 4);
+        game1.init();
+        game.stopTimer();
+        this.game = game1;
+        game.update(gameG);
 
     }
 
