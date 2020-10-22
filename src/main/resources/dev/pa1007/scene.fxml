@@ -45,7 +45,12 @@
                             <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
                         </accelerator>
                     </MenuItem>
-                    <SeparatorMenuItem/>
+                    <SeparatorMenuItem />
+                    <MenuItem mnemonicParsing="false" onAction="#playWithoutPicture" text="Jouer sans images">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                        </accelerator>
+                    </MenuItem>
                     <MenuItem mnemonicParsing="false" onAction="#stopTimer" text="Pause">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="DOWN" shortcut="UP"/>
@@ -115,5 +120,12 @@
                 </font>
             </Text>
         </center>
+      <right>
+         <Label fx:id="shiftingLabel" prefHeight="17.0" prefWidth="96.0" text="Shifting : " BorderPane.alignment="CENTER">
+            <font>
+               <Font size="16.0" />
+            </font>
+         </Label>
+      </right>
     </BorderPane>
 </GridPane>

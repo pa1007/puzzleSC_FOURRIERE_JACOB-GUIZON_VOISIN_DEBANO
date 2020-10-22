@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -22,6 +23,7 @@ public class MainController {
 
     private PuzzleGraphic  game;
     private StopwatchTimer stopwatchTimer;
+    private int count = 0;
 
     @FXML
     private MenuItem startAIItem;
@@ -33,7 +35,8 @@ public class MainController {
     private Text     clock;
     @FXML
     private GridPane gameG;
-
+    @FXML
+    private Label shiftingLabel;
 
     public void setGame(PuzzleGraphic game) {
         this.game = game;
@@ -64,6 +67,8 @@ public class MainController {
             || event.getCode() == KeyCode.RIGHT) {
             this.game.update(this.gameG, this.clock);
             game.startTimer(clock);
+            count = count + 1;
+            this.shiftingLabel.setText("Shifting : "+count);
         }
         if (this.game.isSolved()) {
             this.game.stopTimer();
@@ -79,7 +84,7 @@ public class MainController {
         game.stopTimer();
         this.game = game1;
         game.update(gameG, this.clock);
-
+        count = 0;
     }
 
     @FXML
@@ -126,6 +131,20 @@ public class MainController {
     @FXML
     void leaderboardShowHandler(ActionEvent event) {
 
+    }
+
+    @FXML
+    void playWithoutPicture(ActionEvent event) {
+        gameG.getChildren().clear();
+        PuzzleGraphic game1 = new PuzzleGraphic(4, 4);
+        game1.setNumberOnly(true);
+        game1.init();
+
+        game.stopTimer();
+        this.game = game1;
+
+        game.update(gameG, this.clock);
+        count = 0;
     }
 
     @FXML
