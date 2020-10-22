@@ -5,20 +5,22 @@ import dev.pa1007.game.draw.BlockGraphic;
 import dev.pa1007.game.draw.BlockVoid;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
 import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -28,6 +30,8 @@ import java.util.stream.Collectors;
 
 public class PuzzleGraphic extends Puzzle {
 
+    private boolean numberOnly;
+
     public PuzzleGraphic(int maxX, int maxY) {
         super(maxX, maxY);
     }
@@ -36,7 +40,10 @@ public class PuzzleGraphic extends Puzzle {
     public void init() {
         blocks = new ArrayList<>();
         try {
-            initGraphicBlock(URLDecoder.decode(MainApp.class.getResource("images/test.jpg").getPath(), StandardCharsets.UTF_8));
+            initGraphicBlock(URLDecoder.decode(
+                    MainApp.class.getResource("images/test.jpg").getPath(),
+                    StandardCharsets.UTF_8
+            ));
             initGameGraph();
         }
         catch (IOException e) {
@@ -48,7 +55,6 @@ public class PuzzleGraphic extends Puzzle {
     public void initGraphicBlock(String path) throws IOException {
         int width  = 600;
         int height = 600;
-        System.out.println(path);
         Image scaledInstance = ImageIO.read(new File(path)).getScaledInstance(
                 width,
                 height,
@@ -89,15 +95,43 @@ public class PuzzleGraphic extends Puzzle {
                         finalI,
                         finalJ
                 ))).findFirst().get();
-                ImageView child;
+                Node child;
                 if (block instanceof BlockVoid) {
                     child = new ImageView(SwingFXUtils.toFXImage(((BlockVoid) block).getImage(), null));
-                    child.setFitHeight(50);
-                    child.setFitWidth(50);
+                    ((ImageView) child).setFitHeight(50);
+                    ((ImageView) child).setFitWidth(50);
                 }
                 else {
-                    child = new ImageView(convertToFxImage(((BlockGraphic) block).getImage()));
-                    if(posVoid.contains(block)) {
+                    if (numberOnly) {
+                        Pane  child1 = new AnchorPane();
+                        Label e      = new Label(String.valueOf(block.getNumber()));
+                        e.getStyleClass().add("numberitem");
+                        child1.getStyleClass().add("numberpane");
+                        child1.setBorder(new Border(new BorderStroke(
+                                Color.DEEPPINK, //todo changer couleur
+                                BorderStrokeStyle.SOLID,
+                                new CornerRadii(12),
+                                new BorderWidths(25)
+                        )));
+                        child1.setBackground(new Background(new BackgroundFill(
+                                Color.PINK, //todo changer couleur
+                                new CornerRadii(30),
+                                null
+                        )));
+                        e.setFont(new Font(15));
+                        e.setMaxWidth(Double.MAX_VALUE);
+                        AnchorPane.setLeftAnchor(e, 0.0);
+                        AnchorPane.setTopAnchor(e, 0.0);
+                        AnchorPane.setBottomAnchor(e, 0.0);
+                        AnchorPane.setRightAnchor(e, 0.0);
+                        e.setAlignment(Pos.CENTER);
+                        child1.getChildren().add(e);
+                        child = child1;
+                    }
+                    else {
+                        child = new ImageView(convertToFxImage(((BlockGraphic) block).getImage()));
+                    }
+                    if (posVoid.contains(block)) {
                         EventHandler<? super MouseEvent> eventHandler = (EventHandler<MouseEvent>) event -> {
                             Position b = posVoid.get(posVoid.indexOf(block)).getCurrentPos().clone();
                             block.setCurrentPos(voidBlock.getCurrentPos().clone());
@@ -111,6 +145,20 @@ public class PuzzleGraphic extends Puzzle {
                 gameG.add(child, j, i);
             }
         }
+    }
+
+    public boolean getNumberOnly() {
+        return numberOnly;
+    }
+
+    public void setNumberOnly(boolean numberOnly) {
+        this.numberOnly = numberOnly;
+    }
+
+    public List<Block> getAroundVoid() {
+        List<Position> p = voidBlock.getCurrentPos().getSurrounding();
+        return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(
+                Collectors.toList());
     }
 
     private void initGameGraph() {
@@ -145,11 +193,6 @@ public class PuzzleGraphic extends Puzzle {
         }
 
         return new ImageView(wr).getImage();
-    }
-
-    public List<Block> getAroundVoid() {
-        List<Position> p = voidBlock.getCurrentPos().getSurrounding();
-        return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(Collectors.toList());
     }
 
 }

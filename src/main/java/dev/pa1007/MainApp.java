@@ -4,13 +4,10 @@ import dev.pa1007.controller.MainController;
 import dev.pa1007.game.PuzzleGraphic;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.property.ObjectProperty;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class MainApp extends Application {
 
@@ -20,6 +17,7 @@ public class MainApp extends Application {
         Parent         root       = loader.load();
         MainController controller = loader.getController();
         PuzzleGraphic  game       = new PuzzleGraphic(4, 4);
+        game.setNumberOnly(false);
         game.init();
         controller.setGame(game);
         Scene scene = new Scene(root);
@@ -30,24 +28,10 @@ public class MainApp extends Application {
             Platform.exit();
             System.exit(0);
         });
-        // scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
         root.requestFocus();
-    }
-
-    public static String encodeUriFromHeader(String uri) {
-        StringBuilder sb = new StringBuilder();
-
-        for(char ch : uri.toCharArray()) {
-            if(ch < (char)128) {
-                sb.append(ch);
-            } else {
-                sb.append(String.format("%%%02X", (int)ch));
-            }
-        }
-
-        return sb.toString();
     }
 
     public static void main(String[] args) {
