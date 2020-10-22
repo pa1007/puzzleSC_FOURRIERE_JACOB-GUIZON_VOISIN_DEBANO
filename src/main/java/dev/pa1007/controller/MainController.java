@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 
 public class MainController {
 
@@ -81,7 +82,8 @@ public class MainController {
 
     @FXML
     void loadGameHandler(ActionEvent event) {
-
+        FileChooser fc = new FileChooser();
+        fc.showOpenDialog(gameG.getScene().getWindow());
     }
 
     @FXML

@@ -1,9 +1,10 @@
 package dev.pa1007.game;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Position {
+public class Position implements Serializable {
 
     /**
      * The x coordinate.

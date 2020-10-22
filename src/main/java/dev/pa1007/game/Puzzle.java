@@ -3,9 +3,11 @@ package dev.pa1007.game;
 import dev.pa1007.game.draw.BlockVoid;
 import dev.pa1007.game.draw.StopwatchTimer;
 import javafx.scene.text.Text;
+
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Puzzle {
+public abstract class Puzzle implements Serializable {
 
 
     /**

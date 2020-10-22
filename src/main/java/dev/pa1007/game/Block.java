@@ -1,6 +1,8 @@
 package dev.pa1007.game;
 
-public abstract class Block {
+import java.io.Serializable;
+
+public abstract class Block implements Serializable {
 
 
     /**
