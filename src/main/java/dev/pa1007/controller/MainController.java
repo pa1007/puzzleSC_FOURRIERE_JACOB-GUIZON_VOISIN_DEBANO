@@ -44,6 +44,7 @@ public class MainController {
     @FXML
     public void quit(ActionEvent event) {
         Platform.exit();
+        System.exit(0);
     }
 
     @FXML
@@ -74,7 +75,7 @@ public class MainController {
         game1.init();
         game.stopTimer();
         this.game = game1;
-        game.update(gameG, clock);
+        game.update(gameG, this.clock);
 
     }
 
