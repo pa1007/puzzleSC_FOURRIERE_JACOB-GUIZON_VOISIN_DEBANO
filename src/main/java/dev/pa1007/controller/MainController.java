@@ -2,6 +2,7 @@ package dev.pa1007.controller;
 
 import dev.pa1007.game.PuzzleGraphic;
 import dev.pa1007.game.draw.StopwatchTimer;
+import dev.pa1007.utils.Save;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import java.io.IOException;
 
 public class MainController {
 
@@ -88,6 +90,16 @@ public class MainController {
 
     @FXML
     void saveGameHandler(ActionEvent event) {
+        try {
+            Save.save(game);
+        }
+        catch (IOException e) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText(e.getMessage());
+            a.setContentText("Help");
+            e.printStackTrace();
+            a.show();
+        }
 
     }
 

@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class BlockGraphic extends Block {
 
-    private final BufferedImage image;
+    private transient final BufferedImage image;
 
     public BlockGraphic(int number, Position startPos, BufferedImage image) {
         super(number, startPos);

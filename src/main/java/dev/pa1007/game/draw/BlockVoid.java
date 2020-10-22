@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class BlockVoid extends Block {
 
-    private BufferedImage image;
+    private transient BufferedImage image;
 
     public BlockVoid(Position startPos) {
         super(-1, startPos);

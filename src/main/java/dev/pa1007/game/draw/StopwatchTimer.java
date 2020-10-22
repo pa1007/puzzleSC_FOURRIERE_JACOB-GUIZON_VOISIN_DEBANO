@@ -4,15 +4,16 @@ package dev.pa1007.game.draw;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.text.Text;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class StopwatchTimer extends TimerTask {
+public class StopwatchTimer extends TimerTask implements Serializable {
 
-    private final SimpleDateFormat     sdf = new SimpleDateFormat("mm:ss:S");
-    private       SimpleStringProperty min, sec, millis, sspTime;
+    private final     SimpleDateFormat     sdf = new SimpleDateFormat("mm:ss:S");
+    private transient SimpleStringProperty min, sec, millis, sspTime;
     private long    time;
     private Text    clock;
     private boolean stop = true;
