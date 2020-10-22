@@ -46,12 +46,9 @@ public abstract class Puzzle {
 
 
     public void startTimer(Text clock) {
-        if (!timer.isInterrupted() && !timer.isAlive()) {
+        if (timer.isStop()) {
             timer.setText(clock);
-            timer.startTimer(0);
-        }
-        else if (timer.isInterrupted()) {
-            restartTimer(clock);
+            timer.startTimer(timer.getTime());
         }
     }
 
@@ -59,12 +56,6 @@ public abstract class Puzzle {
         timer.stopTimer(timer.getTime());
     }
 
-    public void restartTimer(Text clock) {
-        long t = timer.getTime();
-        timer = new StopwatchTimer();
-        timer.setText(clock);
-        timer.startTimer(t);
-    }
 
     /**
      * @return The min Y.

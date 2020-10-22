@@ -6,14 +6,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.text.Text;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class StopwatchTimer extends Thread {
+public class StopwatchTimer extends TimerTask {
 
     private final SimpleDateFormat     sdf = new SimpleDateFormat("mm:ss:S");
     private       SimpleStringProperty min, sec, millis, sspTime;
     private long    time;
     private Text    clock;
-    private boolean stop;
+    private boolean stop = true;
+    private boolean timed;
 
     public StopwatchTimer() {
         min = new SimpleStringProperty("00");
@@ -24,25 +27,19 @@ public class StopwatchTimer extends Thread {
 
     @Override
     public void run() {
-        try {
-            while (!isInterrupted()) {
-                setTime(time);
-                Thread.sleep(10);
-                if (stop) {
-                    interrupt();
-                }
-                time = time + 10;
-            }
-        }
-        catch (Exception e) {
-
+        if (!stop) {
+            setTime(time);
+            time = time + 10;
         }
     }
 
     public void startTimer(long time) {
         this.time = time;
-        setPriority(Thread.MIN_PRIORITY);
-        start();
+        if (!timed) {
+            new Timer("Timer").scheduleAtFixedRate(this, 0, 10);
+            timed = true;
+        }
+        stop = false;
     }
 
     public void stopTimer(long time) {
@@ -77,5 +74,9 @@ public class StopwatchTimer extends Thread {
     public void setText(Text clock) {
         this.clock = clock;
         Platform.runLater((() -> clock.setText(sspTime.getValue())));
+    }
+
+    public boolean isStop() {
+        return stop;
     }
 }

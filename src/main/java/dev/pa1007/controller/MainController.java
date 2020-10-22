@@ -1,6 +1,5 @@
 package dev.pa1007.controller;
 
-import dev.pa1007.game.Puzzle;
 import dev.pa1007.game.PuzzleGraphic;
 import dev.pa1007.game.draw.StopwatchTimer;
 import javafx.application.Platform;
@@ -62,7 +61,7 @@ public class MainController {
             this.game.update(this.gameG, this.clock);
             game.startTimer(clock);
         }
-        if(this.game.isSolved()) {
+        if (this.game.isSolved()) {
             this.game.stopTimer();
         }
     }
@@ -122,7 +121,7 @@ public class MainController {
         alertHtp.setHeaderText("Regles du jeu");
         alertHtp.setResizable(true);
         String content = String.format("But du jeu : \n" +
-                "Sur un plateau de 16 cases, il faut replacer, en les glissant, 15 pions dans le bon ordre avec le moins de mouvements possibles. Un click sur le bouton [New Game] melange les pions. Avec la souris, cliquez sur le pion que vous voulez deplacer vers la case libre.Au clavier, utilisez les fleches pour effectuer les deplacements");
+                                       "Sur un plateau de 16 cases, il faut replacer, en les glissant, 15 pions dans le bon ordre avec le moins de mouvements possibles. Un click sur le bouton [New Game] melange les pions. Avec la souris, cliquez sur le pion que vous voulez deplacer vers la case libre.Au clavier, utilisez les fleches pour effectuer les deplacements");
         alertHtp.setContentText(content);
         alertHtp.showAndWait();
     }
@@ -134,9 +133,11 @@ public class MainController {
         alertAbout.setTitle("About");
         alertAbout.setResizable(true);
         alertAbout.setHeaderText("About");
-        String content = String.format("Java version : 14 \n" +
-                "Auteur : Paul-Alexandre FOURRIERE | Paul DEBANO | Louis VOISIN | Amelie JACOB--GUIZON \n" +
-                "Produit dans le cadre du cours Ingenierie logiciel de L3 MIASHS SC");
+        String content = String.format("Java version : 14 \n"
+                                       +
+                                       "Auteur : Paul-Alexandre FOURRIERE | Paul DEBANO | Louis VOISIN | Amelie JACOB--GUIZON \n"
+                                       +
+                                       "Produit dans le cadre du cours Ingenierie logiciel de L3 MIASHS SC");
         alertAbout.setContentText(content);
         alertAbout.showAndWait();
     }
