@@ -28,6 +28,7 @@
         <top>
             <MenuBar AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                      AnchorPane.topAnchor="0.0">
+
                 <Menu text="Game">
                     <MenuItem mnemonicParsing="false" onAction="#newGameHandler" text="New game">
                         <accelerator>
@@ -55,6 +56,8 @@
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="DOWN" shortcut="UP"/>
                         </accelerator>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" onAction="#nButtonHandler" text="Navigation Buttons">
                     </MenuItem>
                     <SeparatorMenuItem/>
                     <Menu text="AI">
@@ -89,6 +92,12 @@
                             <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
                         </accelerator>
                     </MenuItem>
+                </Menu>
+                <Menu text="Move">
+                    <MenuItem text="Up" onAction="#moveUP"/>
+                    <MenuItem text="Down" onAction="#moveDOWN"/>
+                    <MenuItem text="Left" onAction="#moveLEFT"/>
+                    <MenuItem text="Right" onAction="#moveRIGHT"/>
                 </Menu>
                 <Menu text="Leaderboard">
                     <MenuItem mnemonicParsing="false" onAction="#leaderboardShowHandler" text="Show">

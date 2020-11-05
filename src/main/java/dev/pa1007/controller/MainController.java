@@ -6,6 +6,7 @@ import dev.pa1007.utils.Save;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -65,14 +66,18 @@ public class MainController {
             || event.getCode() == KeyCode.UP
             || event.getCode() == KeyCode.LEFT
             || event.getCode() == KeyCode.RIGHT) {
-            this.game.update(this.gameG, this.clock);
-            game.startTimer(clock);
-            count = count + 1;
-            this.shiftingLabel.setText("Shifting : "+count);
+            updateClock();
         }
         if (this.game.isSolved()) {
             this.game.stopTimer();
         }
+    }
+
+    private void updateClock() {
+        this.game.update(this.gameG, this.clock);
+        game.startTimer(clock);
+        count = count + 1;
+        this.shiftingLabel.setText("Shifting : "+count);
     }
 
     //Menu handler start
@@ -161,6 +166,17 @@ public class MainController {
     }
 
     @FXML
+    void nButtonHandler(ActionEvent event) {
+        FXMLLoader loader     = new FXMLLoader(getClass().getResource("scene.fxml"));
+        Alert alertHtp = new Alert(Alert.AlertType.INFORMATION);
+        alertHtp.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alertHtp.setTitle("Navigation button");
+        alertHtp.setHeaderText("Navigation button ");
+        alertHtp.setResizable(true);
+        alertHtp.showAndWait();
+    }
+
+    @FXML
     void aboutHandler(ActionEvent event) {
         Alert alertAbout = new Alert(Alert.AlertType.INFORMATION);
         alertAbout.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
@@ -190,4 +206,23 @@ public class MainController {
     }
 
 
+    public void moveUP(ActionEvent actionEvent) {
+        this.game.move(-1, 0);
+        updateClock();
+    }
+
+    public void moveDOWN(ActionEvent actionEvent) {
+        this.game.move(1, 0);
+        updateClock();
+    }
+
+    public void moveLEFT(ActionEvent actionEvent) {
+        this.game.move(0, -1);
+        updateClock();
+    }
+
+    public void moveRIGHT(ActionEvent actionEvent) {
+        this.game.move(0, 1);
+        updateClock();
+    }
 }
