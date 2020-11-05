@@ -41,7 +41,7 @@ public class PuzzleGraphic extends Puzzle {
         blocks = new ArrayList<>();
         try {
             initGraphicBlock(URLDecoder.decode(
-                    MainApp.class.getResource("images/test.jpg").getPath(),
+                    MainApp.class.getResource("images/fond.jpg").getPath(),
                     StandardCharsets.UTF_8
             ));
             initGameGraph();
@@ -108,17 +108,17 @@ public class PuzzleGraphic extends Puzzle {
                         e.getStyleClass().add("numberitem");
                         child1.getStyleClass().add("numberpane");
                         child1.setBorder(new Border(new BorderStroke(
-                                Color.DEEPPINK, //todo changer couleur
+                                Color.BLUE,
                                 BorderStrokeStyle.SOLID,
                                 new CornerRadii(12),
                                 new BorderWidths(25)
                         )));
                         child1.setBackground(new Background(new BackgroundFill(
-                                Color.PINK, //todo changer couleur
+                                Color.TURQUOISE,
                                 new CornerRadii(30),
                                 null
                         )));
-                        e.setFont(new Font(15));
+                        e.setFont(new Font(30));
                         e.setMaxWidth(Double.MAX_VALUE);
                         AnchorPane.setLeftAnchor(e, 0.0);
                         AnchorPane.setTopAnchor(e, 0.0);
