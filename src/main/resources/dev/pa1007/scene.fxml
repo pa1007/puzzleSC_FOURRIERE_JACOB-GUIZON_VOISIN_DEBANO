@@ -47,14 +47,14 @@
                         </accelerator>
                     </MenuItem>
                     <SeparatorMenuItem />
-                    <MenuItem mnemonicParsing="false" onAction="#playWithoutPicture" text="Jouer sans images">
+                    <MenuItem mnemonicParsing="false" onAction="#playWithoutPicture" text="Play with numbers only">
                         <accelerator>
-                            <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                            <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" onAction="#stopTimer" text="Pause">
                         <accelerator>
-                            <KeyCodeCombination alt="UP" code="T" control="UP" meta="UP" shift="DOWN" shortcut="UP"/>
+                            <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" onAction="#nButtonHandler" text="Navigation Buttons">

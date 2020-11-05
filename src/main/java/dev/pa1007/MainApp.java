@@ -1,5 +1,6 @@
 package dev.pa1007;
 
+import dev.pa1007.controller.HomeController;
 import dev.pa1007.controller.MainController;
 import dev.pa1007.game.PuzzleGraphic;
 import javafx.application.Application;
@@ -14,8 +15,11 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader     loader     = new FXMLLoader(getClass().getResource("scene.fxml"));
+        FXMLLoader     loader2    = new FXMLLoader(getClass().getResource("home.fxml"));
         Parent         root       = loader.load();
+        Parent         root2      = loader2.load();
         MainController controller = loader.getController();
+        HomeController controller2= loader2.getController();
         PuzzleGraphic  game       = new PuzzleGraphic(4, 4);
         game.setNumberOnly(false);
         game.init();
@@ -32,6 +36,13 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
         root.requestFocus();
+
+        /*Scene scene2 = new Scene(root2);
+        stage.setTitle("Home page");
+        //stage.getIcons().add(new Image("images/taquin.png"));
+        stage.setScene(scene2);
+        stage.show();
+        root2.requestFocus();*/
     }
 
     public static void main(String[] args) {

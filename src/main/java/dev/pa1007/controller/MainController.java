@@ -77,7 +77,7 @@ public class MainController {
         this.game.update(this.gameG, this.clock);
         game.startTimer(clock);
         count = count + 1;
-        this.shiftingLabel.setText("Shifting : "+count);
+        this.shiftingLabel.setText("Move : "+count);
     }
 
     //Menu handler start
