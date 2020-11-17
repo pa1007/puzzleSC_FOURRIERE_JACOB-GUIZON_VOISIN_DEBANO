@@ -1,5 +1,6 @@
 package dev.pa1007.controller;
 
+import dev.pa1007.game.PuzzleConsole;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,17 +9,26 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 
 
 public class HomeController {
+
+    private PuzzleConsole gameWithoutGUI;
 
     @FXML
     private TextField gridSize;
     @FXML
     private CheckBox withGUI;
+    @FXML
+    private CheckBox withImage;
+
 
     public boolean getWithGUI() {
         return withGUI.isSelected();
+    }
+    public boolean getWithImage() {
+        return withImage.isSelected();
     }
 
     @FXML
@@ -30,7 +40,9 @@ public class HomeController {
     public void loadGameHandler(ActionEvent event) {
         FileChooser fc = new FileChooser();
         File game = fc.showOpenDialog(null);
-        game.getAbsolutePath();
+        if(game != null) {
+            game.getAbsolutePath();
+        }
     }
 
     @FXML
@@ -43,16 +55,24 @@ public class HomeController {
     public void chooseImageHandler(ActionEvent event) {
         FileChooser fc = new FileChooser();
         File image = fc.showOpenDialog(null);
-        image.getAbsolutePath();
+        if(image != null) {
+            image.getAbsolutePath();
+        }
     }
 
     @FXML
-    public void newGameHandler(ActionEvent event) {
+    public void newGameHandler(ActionEvent event) throws IOException {
         String stringSize = gridSize.getText();
         if(!stringSize.isEmpty()) {
             int intSize = Integer.parseInt(stringSize);
         }
         System.out.println(getWithGUI());
+        System.out.println(getWithImage());
+
+        if(getWithGUI()) {
+            gameWithoutGUI = new PuzzleConsole(4,4);
+            gameWithoutGUI.init();
+        }
     }
 
 }
