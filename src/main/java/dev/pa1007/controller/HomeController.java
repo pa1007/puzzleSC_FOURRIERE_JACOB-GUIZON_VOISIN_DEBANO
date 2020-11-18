@@ -5,7 +5,9 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -15,6 +17,7 @@ import java.io.IOException;
 public class HomeController {
 
     private PuzzleConsole gameWithoutGUI;
+    private ToggleGroup theme = new ToggleGroup();
 
     @FXML
     private TextField gridSize;
@@ -22,7 +25,14 @@ public class HomeController {
     private CheckBox withGUI;
     @FXML
     private CheckBox withImage;
-
+    @FXML
+    protected RadioButton radioButtonWhiteTheme;
+    @FXML
+    protected RadioButton radioButtonDarkTheme;
+    @FXML
+    protected RadioButton radioButtonBlueTheme;
+    @FXML
+    protected RadioButton radioButtonYellowTheme;
 
     public boolean getWithGUI() {
         return withGUI.isSelected();
