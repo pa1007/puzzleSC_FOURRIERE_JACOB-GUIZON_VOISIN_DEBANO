@@ -32,7 +32,7 @@ public class MainApp extends Application {
             Platform.exit();
             System.exit(0);
         });
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
         root.requestFocus();

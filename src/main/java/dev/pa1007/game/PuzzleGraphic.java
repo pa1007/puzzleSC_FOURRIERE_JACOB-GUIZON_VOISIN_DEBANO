@@ -108,13 +108,13 @@ public class PuzzleGraphic extends Puzzle {
                         e.getStyleClass().add("numberitem");
                         child1.getStyleClass().add("numberpane");
                         child1.setBorder(new Border(new BorderStroke(
-                                Color.BLUE,
+                                Color.BLACK,
                                 BorderStrokeStyle.SOLID,
                                 new CornerRadii(12),
                                 new BorderWidths(25)
                         )));
                         child1.setBackground(new Background(new BackgroundFill(
-                                Color.TURQUOISE,
+                                Color.GREY,
                                 new CornerRadii(30),
                                 null
                         )));
