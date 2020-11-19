@@ -30,12 +30,16 @@ public abstract class Puzzle implements Serializable {
     /**
      * the timer.
      */
-    private StopwatchTimer timer;
+    protected StopwatchTimer timer;
 
     public Puzzle(int maxX, int maxY) {
         this.maxX = maxX;
         this.maxY = maxY;
         timer = new StopwatchTimer();
+    }
+
+    public BlockVoid getVoidBlock() {
+        return voidBlock;
     }
 
     /**
