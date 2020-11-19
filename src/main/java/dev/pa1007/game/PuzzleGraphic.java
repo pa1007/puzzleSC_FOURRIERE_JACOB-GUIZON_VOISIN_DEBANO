@@ -22,6 +22,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +41,7 @@ public class PuzzleGraphic extends Puzzle {
 
     public PuzzleGraphic(int maxX, int maxY) {
         super(maxX, maxY);
-        this.imagePath = MainApp.class.getResource("images/fond.jpg").getPath();
+        this.imagePath = URLDecoder.decode(MainApp.class.getResource("images/fond.jpg").getPath(), StandardCharsets.UTF_8);
     }
 
     public PuzzleGraphic(int maxX, int maxY, String imagePath) {
