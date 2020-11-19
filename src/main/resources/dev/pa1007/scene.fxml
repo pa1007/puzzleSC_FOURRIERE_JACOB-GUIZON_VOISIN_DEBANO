@@ -46,6 +46,14 @@
                             <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
                         </accelerator>
                     </MenuItem>
+                    <Menu mnemonicParsing="false" text="Change theme">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="White theme" onAction="#whiteTheme"/>
+                            <MenuItem mnemonicParsing="false" text="Dark theme" onAction="#darkTheme"/>
+                            <MenuItem mnemonicParsing="false" text="Blue theme" onAction="#blueTheme"/>
+                            <MenuItem mnemonicParsing="false" text="Yellow theme" onAction="#yellowTheme"/>
+                        </items>
+                    </Menu>
                     <SeparatorMenuItem />
                     <MenuItem mnemonicParsing="false" onAction="#playWithoutPicture" text="Play with numbers only">
                         <accelerator>

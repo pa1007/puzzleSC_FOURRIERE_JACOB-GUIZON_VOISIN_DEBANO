@@ -8,7 +8,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 public class MainApp extends Application {
 
@@ -33,6 +36,7 @@ public class MainApp extends Application {
             System.exit(0);
         });
         scene.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
+        stage.getIcons().add(new Image(getClass().getResource("images/taquin.png").toExternalForm()));
         stage.setScene(scene);
         stage.show();
         root.requestFocus();

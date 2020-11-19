@@ -9,7 +9,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -22,9 +21,11 @@ public class HomeController {
     @FXML
     private TextField gridSize;
     @FXML
-    private CheckBox withGUI;
+    private RadioButton radioButtonConsole;
     @FXML
-    private CheckBox withImage;
+    private RadioButton radioButtonNumber;
+    @FXML
+    private RadioButton radioButtonPicture;
     @FXML
     protected RadioButton radioButtonWhiteTheme;
     @FXML
@@ -34,11 +35,21 @@ public class HomeController {
     @FXML
     protected RadioButton radioButtonYellowTheme;
 
-    public boolean getWithGUI() {
-        return withGUI.isSelected();
+    public boolean getRadioButtonConsole() {
+        return radioButtonConsole.isSelected();
     }
-    public boolean getWithImage() {
-        return withImage.isSelected();
+
+    @FXML private void initialize () {
+        ToggleGroup theme = new ToggleGroup();
+        ToggleGroup gui = new ToggleGroup();
+        radioButtonWhiteTheme.setToggleGroup(theme);
+        radioButtonWhiteTheme.setSelected(true);
+        radioButtonDarkTheme.setToggleGroup(theme);
+        radioButtonBlueTheme.setToggleGroup(theme);
+        radioButtonYellowTheme.setToggleGroup(theme);
+        radioButtonConsole.setToggleGroup(gui);
+        radioButtonNumber.setToggleGroup(gui);
+        radioButtonPicture.setToggleGroup(gui);
     }
 
     @FXML
@@ -76,13 +87,13 @@ public class HomeController {
         if(!stringSize.isEmpty()) {
             int intSize = Integer.parseInt(stringSize);
         }
-        System.out.println(getWithGUI());
-        System.out.println(getWithImage());
+        //System.out.println(getWithGUI());
+        //System.out.println(getWithImage());
 
-        if(getWithGUI()) {
+        /*if(getWithGUI()) {
             gameWithoutGUI = new PuzzleConsole(4,4);
             gameWithoutGUI.init();
-        }
+        }*/
     }
 
 }

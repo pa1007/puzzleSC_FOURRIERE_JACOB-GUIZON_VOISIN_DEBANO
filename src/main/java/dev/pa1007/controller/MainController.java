@@ -93,6 +93,23 @@ public class MainController {
     }
 
     @FXML
+    void whiteTheme(ActionEvent event) {
+        //getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+    }
+    @FXML
+    void darkTheme(ActionEvent event) {
+        //getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
+    }
+    @FXML
+    void blueTheme(ActionEvent event) {
+        //getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
+    }
+    @FXML
+    void yellowTheme(ActionEvent event) {
+        //getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
+    }
+
+    @FXML
     void loadGameHandler(ActionEvent event) {
         FileChooser fc = new FileChooser();
         fc.showOpenDialog(gameG.getScene().getWindow());
