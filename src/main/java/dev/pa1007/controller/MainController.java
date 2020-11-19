@@ -1,12 +1,12 @@
 package dev.pa1007.controller;
 
+import dev.pa1007.game.Puzzle;
 import dev.pa1007.game.PuzzleGraphic;
-import dev.pa1007.game.draw.StopwatchTimer;
+import dev.pa1007.utils.LoadSaveException;
 import dev.pa1007.utils.Save;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -17,14 +17,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import java.io.IOException;
 
 public class MainController {
 
-    private PuzzleGraphic  game;
-    private StopwatchTimer stopwatchTimer;
-    private int count = 0;
+    private PuzzleGraphic game;
+    private int           count = 0;
 
     @FXML
     private MenuItem startAIItem;
@@ -37,7 +35,7 @@ public class MainController {
     @FXML
     private GridPane gameG;
     @FXML
-    private Label shiftingLabel;
+    private Label    shiftingLabel;
 
     public void setGame(PuzzleGraphic game) {
         this.game = game;
@@ -52,6 +50,26 @@ public class MainController {
     public void quit(ActionEvent event) {
         Platform.exit();
         System.exit(0);
+    }
+
+    public void moveUP(ActionEvent actionEvent) {
+        this.game.move(-1, 0);
+        updateClock();
+    }
+
+    public void moveDOWN(ActionEvent actionEvent) {
+        this.game.move(1, 0);
+        updateClock();
+    }
+
+    public void moveLEFT(ActionEvent actionEvent) {
+        this.game.move(0, -1);
+        updateClock();
+    }
+
+    public void moveRIGHT(ActionEvent actionEvent) {
+        this.game.move(0, 1);
+        updateClock();
     }
 
     @FXML
@@ -71,13 +89,6 @@ public class MainController {
         if (this.game.isSolved()) {
             this.game.stopTimer();
         }
-    }
-
-    private void updateClock() {
-        this.game.update(this.gameG, this.clock);
-        game.startTimer(clock);
-        count = count + 1;
-        this.shiftingLabel.setText("Move : "+count);
     }
 
     //Menu handler start
@@ -110,9 +121,21 @@ public class MainController {
     }
 
     @FXML
-    void loadGameHandler(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.showOpenDialog(gameG.getScene().getWindow());
+    void loadGameHandler(ActionEvent event) throws IOException, LoadSaveException {
+        Puzzle load = Save.load();
+        setGame((PuzzleGraphic) load);
+        //        FileChooser fc = new FileChooser();
+        //        try {
+        //            Puzzle load = Save.load(fc.showOpenDialog(gameG.getScene().getWindow()).getPath());
+        //            setGame((PuzzleGraphic) load);
+        //        }
+        //        catch (IOException | LoadSaveException e) {
+        //            Alert a = new Alert(Alert.AlertType.ERROR);
+        //            a.setContentText(e.getMessage());
+        //            a.setContentText("Cela n'a pas fonctionné");
+        //            e.printStackTrace();
+        //            a.show();
+        //        }
     }
 
     @FXML
@@ -181,10 +204,10 @@ public class MainController {
         alertHtp.setContentText(content);
         alertHtp.showAndWait();
     }
+    //Menu handler stop
 
     @FXML
     void nButtonHandler(ActionEvent event) {
-        FXMLLoader loader     = new FXMLLoader(getClass().getResource("scene.fxml"));
         Alert alertHtp = new Alert(Alert.AlertType.INFORMATION);
         alertHtp.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alertHtp.setTitle("Navigation button");
@@ -208,38 +231,25 @@ public class MainController {
         alertAbout.setContentText(content);
         alertAbout.showAndWait();
     }
-    //Menu handler stop
+
+    private void updateClock() {
+        this.game.update(this.gameG, this.clock);
+        game.startTimer(clock);
+        count = count + 1;
+        this.shiftingLabel.setText("Move : " + count);
+    }
 
     private void initGame() {
-        RowConstraints    rowConstraints    = gameG.getRowConstraints().get(0);
-        ColumnConstraints columnConstraints = gameG.getColumnConstraints().get(0);
-        for (int i = 0; i < game.getMaxY() - 1; i++) {
-            gameG.getRowConstraints().add(rowConstraints);
-        }
-        for (int i = 0; i < game.getMaxX() - 1; i++) {
-            gameG.getColumnConstraints().add(columnConstraints);
+        if (gameG.getRowConstraints().size() == 1 && gameG.getColumnConstraints().size() == 1) {
+            RowConstraints    rowConstraints    = gameG.getRowConstraints().get(0);
+            ColumnConstraints columnConstraints = gameG.getColumnConstraints().get(0);
+            for (int i = 0; i < game.getMaxY() - 1; i++) {
+                gameG.getRowConstraints().add(rowConstraints);
+            }
+            for (int i = 0; i < game.getMaxX() - 1; i++) {
+                gameG.getColumnConstraints().add(columnConstraints);
+            }
         }
         game.update(gameG, clock);
-    }
-
-
-    public void moveUP(ActionEvent actionEvent) {
-        this.game.move(-1, 0);
-        updateClock();
-    }
-
-    public void moveDOWN(ActionEvent actionEvent) {
-        this.game.move(1, 0);
-        updateClock();
-    }
-
-    public void moveLEFT(ActionEvent actionEvent) {
-        this.game.move(0, -1);
-        updateClock();
-    }
-
-    public void moveRIGHT(ActionEvent actionEvent) {
-        this.game.move(0, 1);
-        updateClock();
     }
 }

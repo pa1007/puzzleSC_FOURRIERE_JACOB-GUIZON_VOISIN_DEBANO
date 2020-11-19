@@ -3,6 +3,7 @@ package dev.pa1007.game;
 import dev.pa1007.MainApp;
 import dev.pa1007.game.draw.BlockGraphic;
 import dev.pa1007.game.draw.BlockVoid;
+import dev.pa1007.game.draw.StopwatchTimer;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -21,29 +22,36 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PuzzleGraphic extends Puzzle {
 
-    private boolean numberOnly;
+    private static final int     WIDTH  = 600;
+    private static final int     HEIGHT = 600;
+    private              boolean numberOnly;
+    private transient    Image   image;
+    private              String  imagePath;
+
 
     public PuzzleGraphic(int maxX, int maxY) {
         super(maxX, maxY);
+        this.imagePath = MainApp.class.getResource("images/fond.jpg").getPath();
+    }
+
+    public PuzzleGraphic(int maxX, int maxY, String imagePath) {
+        super(maxX, maxY);
+        this.imagePath = imagePath;
     }
 
     @Override
     public void init() {
         blocks = new ArrayList<>();
         try {
-            initGraphicBlock(URLDecoder.decode(
-                    MainApp.class.getResource("images/fond.jpg").getPath(),
-                    StandardCharsets.UTF_8
-            ));
+            initGraphicBlock(imagePath);
             initGameGraph();
         }
         catch (IOException e) {
@@ -53,21 +61,20 @@ public class PuzzleGraphic extends Puzzle {
 
 
     public void initGraphicBlock(String path) throws IOException {
-        int width  = 600;
-        int height = 600;
         Image scaledInstance = ImageIO.read(new File(path)).getScaledInstance(
-                width,
-                height,
+                WIDTH,
+                HEIGHT,
                 Image.SCALE_DEFAULT
         );
-        BufferedImage read = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        image = scaledInstance;
+        BufferedImage read = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         read.getGraphics().drawImage(scaledInstance, 0, 0, null);
         int h   = read.getHeight() / maxX - 1;
         int w   = read.getWidth() / maxY - 1;
         int nb  = 0;
         int max = (maxX * maxY) - 1;
-        for (int j = 0; j < width && nb != max; j += w) {
-            for (int i = 0; i < height; i += h) {
+        for (int j = 0; j < WIDTH && nb != max; j += w) {
+            for (int i = 0; i < HEIGHT; i += h) {
                 int dh = h;
                 if (i + w > read.getWidth()) {
                     continue;
@@ -159,6 +166,50 @@ public class PuzzleGraphic extends Puzzle {
         List<Position> p = voidBlock.getCurrentPos().getSurrounding();
         return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(
                 Collectors.toList());
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void loadImage(Image image) {
+        long t = this.timer.getTime();
+        this.timer.stop();
+        this.timer = new StopwatchTimer();
+        timer.setTimel(t);
+        Image scaledInstance = image.getScaledInstance(
+                WIDTH,
+                HEIGHT,
+                Image.SCALE_DEFAULT
+        );
+        this.image = scaledInstance;
+        BufferedImage read = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        int           h    = read.getHeight() / maxX - 1;
+        int           w    = read.getWidth() / maxY - 1;
+        read.getGraphics().drawImage(scaledInstance, 0, 0, null);
+        for (int i = 0; i < maxY; i++) {
+            for (int j = 0; j < maxX; j++) {
+                int finalJ = j;
+                int finalI = i;
+                Optional<Block> first = blocks.stream().filter((
+                                                                       block -> (
+                                                                               block.getStartPos().equals(
+                                                                                       new Position(
+                                                                                               finalI,
+                                                                                               finalJ
+                                                                                       ))
+                                                                               && !(block instanceof BlockVoid)
+                                                                       )
+                                                               )).findFirst();
+                if (first.isPresent()) {
+                    ((BlockGraphic) first.get()).setImage(read.getSubimage(i * w, j * h, w, h));
+                }
+            }
+        }
     }
 
     private void initGameGraph() {
