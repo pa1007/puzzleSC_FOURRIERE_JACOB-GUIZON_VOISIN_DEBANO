@@ -6,15 +6,19 @@ import java.awt.image.BufferedImage;
 
 public class BlockGraphic extends Block {
 
-    private transient final BufferedImage image;
+    private transient BufferedImage image;
 
     public BlockGraphic(int number, Position startPos, BufferedImage image) {
         super(number, startPos);
         this.image = image;
     }
 
-
     public BufferedImage getImage() {
         return image;
     }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
 }
