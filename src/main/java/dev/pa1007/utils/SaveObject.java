@@ -13,7 +13,7 @@ public class SaveObject implements Serializable {
 
     private Puzzle puzzle;
 
-    private Boolean graph;
+    private boolean graph;
 
     private String image;
 
@@ -23,9 +23,7 @@ public class SaveObject implements Serializable {
         graph = true;
     }
 
-    public SaveObject(Puzzle puzzle) {
-        this.puzzle = puzzle;
-    }
+    public SaveObject(Puzzle puzzle) { this.puzzle = puzzle; }
 
     public Puzzle getPuzzle() {
         return puzzle;

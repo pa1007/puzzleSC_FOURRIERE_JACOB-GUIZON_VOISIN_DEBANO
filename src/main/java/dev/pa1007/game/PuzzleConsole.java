@@ -2,7 +2,10 @@ package dev.pa1007.game;
 
 import dev.pa1007.game.draw.BlockString;
 import dev.pa1007.game.draw.BlockVoid;
+import dev.pa1007.utils.LoadSaveException;
+import dev.pa1007.utils.Save;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,17 +56,38 @@ public class PuzzleConsole extends Puzzle {
         String  s;
         while (!this.isSolved()) {
             System.out.println(this.createString());
-            System.out.println("[g] l | [d] → | [h] ↑ | [b] ↓");
+            System.out.println("[g] l | [d] → | [h] ↑ | [b] ↓ | [s] sauvegarder | [c] charger");
             s = sc.nextLine();
-            while (!(s.equals("g") || s.equals("d") || s.equals("h") || s.equals("b"))) {
+            while (!(s.equals("g") || s.equals("d") || s.equals("h") || s.equals("b") || s.equals("s") || s.equals("c"))) {
                 System.out.println("Entrez une valeur correcte");
                 s = sc.nextLine();
             }
-            switch (s) {
+            switch (s.toLowerCase()) {
                 case "b" -> move(1, 0);
                 case "h" -> move(-1, 0);
                 case "d" -> move(0, 1);
                 case "g" -> move(0, -1);
+                case "s" -> {
+                    try {
+                        Save.save(this);
+                    }
+                    catch(IOException e){
+                        System.out.println("Echec de la sauvegarde.");
+                    }
+                }
+                case "c" -> {
+                    try {
+                        Puzzle load = Save.load();
+                        PuzzleConsole t = (PuzzleConsole) load;
+                        this.blocks = t.blocks;
+                        this.voidBlock = t.voidBlock;
+                        this.timer = t.timer;
+                    }
+                    catch(IOException | LoadSaveException e) {
+                        System.out.println("Echec du chargement");
+                    }
+
+                }
             }
         }
     }
