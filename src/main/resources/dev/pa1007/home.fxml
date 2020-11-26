@@ -12,7 +12,6 @@
         <menus>
           <Menu mnemonicParsing="false" text="Game">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#menuNewGameHandler" text="New game" />
                 <MenuItem mnemonicParsing="false" onAction="#loadGameHandler" text="Load game" />
                 <MenuItem mnemonicParsing="false" onAction="#quitHandler" text="Quit" />
             </items>
