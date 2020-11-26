@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+      fx:controller="dev.pa1007.controller.LeaderBoardController">
+    <children>
+        <Text layoutX="211.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LeaderBoard">
+            <font>
+                <Font size="32.0"/>
+            </font>
+        </Text>
+        <GridPane layoutX="152.0" layoutY="86.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="48.0" minWidth="48.0" prefWidth="48.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="48.0" minWidth="48.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Text fx:id="number1" fill="#04fc00" strokeType="OUTSIDE" strokeWidth="0.0" text="#1">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="number2" fill="#15d712" strokeType="OUTSIDE" strokeWidth="0.0" text="#2"
+                      GridPane.rowIndex="1">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="number3" fill="#19c616" strokeType="OUTSIDE" strokeWidth="0.0" text="#3"
+                      GridPane.rowIndex="2">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="number4" fill="#0f790c" strokeType="OUTSIDE" strokeWidth="0.0" text="#4"
+                      GridPane.rowIndex="3">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="number5" fill="#c45918" strokeType="OUTSIDE" strokeWidth="0.0" text="#5"
+                      wrappingWidth="27.7275390625" GridPane.rowIndex="4">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="number6" fill="#d7411f" strokeType="OUTSIDE" strokeWidth="0.0" text="#6"
+                      GridPane.rowIndex="5">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="number7" fill="#ae0909" strokeType="OUTSIDE" strokeWidth="0.0" text="#7"
+                      GridPane.rowIndex="6">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="number8" fill="#a11010" strokeType="OUTSIDE" strokeWidth="0.0" text="#8"
+                      GridPane.rowIndex="7">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="number9" fill="#cd0000" strokeType="OUTSIDE" strokeWidth="0.0" text="#9"
+                      GridPane.rowIndex="8">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="number10" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="#10"
+                      GridPane.rowIndex="9">
+                    <font>
+                        <Font size="21.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="name1" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1"/>
+                <Text fx:id="name2" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Text fx:id="name3" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Text fx:id="name4" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Text fx:id="name5" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Text fx:id="name6" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                <Text fx:id="name7" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                <Text fx:id="name8" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                <Text fx:id="name9" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                <Text fx:id="name10" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+                <Text fx:id="score10" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2" GridPane.rowIndex="9"/>
+                <Text fx:id="score9" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+                <Text fx:id="score8" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+                <Text fx:id="score7" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                <Text fx:id="score6" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                <Text fx:id="score5" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                <Text fx:id="score3" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                <Text fx:id="score4" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                <Text fx:id="score2" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Text fx:id="score1" onMouseClicked="#mouseCLickText" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="null/NaN" GridPane.columnIndex="2"/>
+            </children>
+        </GridPane>
+        <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshHandler" text="Refresh"/>
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeHandler" text="Close"/>
+    </children>
+</Pane>
