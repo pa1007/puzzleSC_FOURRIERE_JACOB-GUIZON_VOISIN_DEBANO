@@ -4,10 +4,7 @@ import dev.pa1007.game.PuzzleConsole;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import java.io.File;
@@ -17,22 +14,6 @@ import java.io.IOException;
 public class HomeController {
 
     private PuzzleConsole gameWithoutGUI;
-
-    @FXML
-    void aboutHandler(ActionEvent event) {
-        Alert alertAbout = new Alert(Alert.AlertType.INFORMATION);
-        alertAbout.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alertAbout.setTitle("About");
-        alertAbout.setResizable(true);
-        alertAbout.setHeaderText("About");
-        String content = String.format("Java version : 14 \n"
-                +
-                "Auteur : Paul-Alexandre FOURRIERE | Paul DEBANO | Louis VOISIN | Amelie JACOB--GUIZON \n"
-                +
-                "Produit dans le cadre du cours Ingenierie logiciel de L3 MIASHS SC");
-        alertAbout.setContentText(content);
-        alertAbout.showAndWait();
-    }
 
     @FXML
     private TextField gridSize;
@@ -50,12 +31,41 @@ public class HomeController {
     protected RadioButton radioButtonBlueTheme;
     @FXML
     protected RadioButton radioButtonYellowTheme;
+    @FXML
+    private Button newGame;
 
+
+    public String getGridSize() {
+        return gridSize.getText();
+    }
     public boolean getRadioButtonConsole() {
         return radioButtonConsole.isSelected();
     }
+    public boolean getRadioButtonNumber() {
+        return radioButtonNumber.isSelected();
+    }
+    public boolean getRadioButtonPicture() {
+        return radioButtonPicture.isSelected();
+    }
+    public boolean getRadioButtonWhiteTheme() {
+        return radioButtonWhiteTheme.isSelected();
+    }
+    public boolean getRadioButtonDarkTheme() {
+        return radioButtonDarkTheme.isSelected();
+    }
+    public boolean getRadioButtonBlueTheme() {
+        return radioButtonBlueTheme.isSelected();
+    }
+    public boolean getRadioButtonYellowTheme() {
+        return radioButtonYellowTheme.isSelected();
+    }
+    public Button getNewGame() {
+        return newGame;
+    }
 
-    @FXML private void initialize () {
+
+    @FXML
+    private void initialize () throws IOException {
         ToggleGroup theme = new ToggleGroup();
         ToggleGroup gui = new ToggleGroup();
         radioButtonWhiteTheme.setToggleGroup(theme);
@@ -67,6 +77,22 @@ public class HomeController {
         radioButtonNumber.setToggleGroup(gui);
         radioButtonPicture.setToggleGroup(gui);
         radioButtonPicture.setSelected(true);
+    }
+
+    @FXML
+    void aboutHandler(ActionEvent event) {
+        Alert alertAbout = new Alert(Alert.AlertType.INFORMATION);
+        alertAbout.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alertAbout.setTitle("About");
+        alertAbout.setResizable(true);
+        alertAbout.setHeaderText("About");
+        String content = String.format("Java version : 14 \n"
+                +
+                "Auteur : Paul-Alexandre FOURRIERE | Paul DEBANO | Louis VOISIN | Amelie JACOB--GUIZON \n"
+                +
+                "Produit dans le cadre du cours Ingenierie logiciel de L3 MIASHS SC");
+        alertAbout.setContentText(content);
+        alertAbout.showAndWait();
     }
 
     @FXML
@@ -99,31 +125,7 @@ public class HomeController {
     }
 
     @FXML
-    public void newGameHandler(ActionEvent event) throws IOException {
-        if(radioButtonConsole.isSelected()) {
-            // Lancer le jeu en console
-        } else {
-            if (radioButtonNumber.isSelected()) {
-            // Lancer le jeu uniquement avec les numéros (sans image)
-            } else if(radioButtonPicture.isSelected()) {
-                // Lancer le jeu avec image
-                String stringSize = gridSize.getText();
-                if (!stringSize.isEmpty()) {
-                    int intSize = Integer.parseInt(stringSize);
-                }
-                if (radioButtonWhiteTheme.isSelected()) {
-                    // Appliquer le thème blanc à la fenêtre de jeu
-                } else if (radioButtonDarkTheme.isSelected()) {
-                    // Appliquer le thème dark à la fenêtre de jeu
-                } else if (radioButtonBlueTheme.isSelected()) {
-                    // Appliquer le thème bleu à la fenêtre de jeu
-                } else if (radioButtonYellowTheme.isSelected()) {
-                    // Appliquer le thème jaune à la fenêtre de jeu
-                }
-            }
-        }
-        //System.out.println(getWithGUI());
-        //System.out.println(getWithImage());
+    public void newGameHandler(ActionEvent event) {
 
         /*if(getWithGUI()) {
             gameWithoutGUI = new PuzzleConsole(4,4);

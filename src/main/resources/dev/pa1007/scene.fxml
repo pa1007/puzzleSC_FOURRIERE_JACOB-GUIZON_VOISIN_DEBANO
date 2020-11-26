@@ -48,10 +48,10 @@
                     </MenuItem>
                     <Menu mnemonicParsing="false" text="Change theme">
                         <items>
-                            <MenuItem fx:id="whiteTheme" mnemonicParsing="false" text="White theme" onAction="#whiteTheme"/>
-                            <MenuItem fx:id="darkTheme" mnemonicParsing="false" text="Dark theme" onAction="#darkTheme"/>
-                            <MenuItem fx:id="blueTheme" mnemonicParsing="false" text="Blue theme" onAction="#blueTheme"/>
-                            <MenuItem fx:id="yellowTheme" mnemonicParsing="false" text="Yellow theme" onAction="#yellowTheme"/>
+                            <MenuItem fx:id="whiteTheme" mnemonicParsing="false" text="White theme" />
+                            <MenuItem fx:id="darkTheme" mnemonicParsing="false" text="Dark theme" />
+                            <MenuItem fx:id="blueTheme" mnemonicParsing="false" text="Blue theme" />
+                            <MenuItem fx:id="yellowTheme" mnemonicParsing="false" text="Yellow theme" />
                         </items>
                     </Menu>
                     <SeparatorMenuItem />
