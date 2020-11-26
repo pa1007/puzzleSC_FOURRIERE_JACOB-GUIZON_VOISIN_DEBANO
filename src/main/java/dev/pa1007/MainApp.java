@@ -41,12 +41,12 @@ public class MainApp extends Application {
         stage.show();
         root.requestFocus();
 
-        /*Scene scene2 = new Scene(root2);
+        Scene scene2 = new Scene(root2);
         stage.setTitle("Home page");
         //stage.getIcons().add(new Image("images/taquin.png"));
         stage.setScene(scene2);
         stage.show();
-        root2.requestFocus();*/
+        root2.requestFocus();
     }
 
     public static void main(String[] args) {
