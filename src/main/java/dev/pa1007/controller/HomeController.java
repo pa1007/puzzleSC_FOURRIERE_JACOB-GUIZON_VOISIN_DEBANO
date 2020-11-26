@@ -4,7 +4,6 @@ import dev.pa1007.game.PuzzleConsole;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -16,7 +15,6 @@ import java.io.IOException;
 public class HomeController {
 
     private PuzzleConsole gameWithoutGUI;
-    private ToggleGroup theme = new ToggleGroup();
 
     @FXML
     private TextField gridSize;

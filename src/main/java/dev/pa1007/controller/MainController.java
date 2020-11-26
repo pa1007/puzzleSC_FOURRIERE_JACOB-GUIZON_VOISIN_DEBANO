@@ -7,6 +7,7 @@ import dev.pa1007.utils.Save;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -23,6 +24,7 @@ public class MainController {
 
     private PuzzleGraphic game;
     private int           count = 0;
+    private Scene s;
 
     @FXML
     private MenuItem startAIItem;
@@ -36,6 +38,11 @@ public class MainController {
     private GridPane gameG;
     @FXML
     private Label    shiftingLabel;
+
+
+    public void initialize() {
+        this.s = mainG.getScene();
+    }
 
     public void setGame(PuzzleGraphic game) {
         this.game = game;
@@ -105,19 +112,27 @@ public class MainController {
 
     @FXML
     void whiteTheme(ActionEvent event) {
-        //getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        //s.getRoot().getStylesheets().add(getClass().getResource("white-theme.css").toExternalForm());
+        //s.getStylesheets().add(getClass().getResource("white-theme.css").toExternalForm());
+        //mainG.getStylesheets().add(getClass().getResource("white-theme.css").toExternalForm());
     }
     @FXML
     void darkTheme(ActionEvent event) {
-        //getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
+        //s.getRoot().getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
+        //s.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
+        //mainG.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
     }
     @FXML
     void blueTheme(ActionEvent event) {
-        //getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
+        //s.getRoot().getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
+        //s.getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
+        //mainG.getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
     }
     @FXML
     void yellowTheme(ActionEvent event) {
-        //getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
+        //s.getRoot().getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
+        //s.getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
+        //mainG.getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
     }
 
     @FXML
