@@ -1,5 +1,7 @@
 package dev.pa1007.controller;
 
+import dev.pa1007.MainApp;
+import dev.pa1007.Test;
 import dev.pa1007.game.Puzzle;
 import dev.pa1007.game.PuzzleGraphic;
 import dev.pa1007.utils.LoadSaveException;
@@ -7,9 +9,13 @@ import dev.pa1007.utils.Save;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
@@ -17,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainController {
@@ -49,12 +56,15 @@ public class MainController {
     public MenuItem getWhiteTheme() {
         return whiteTheme;
     }
+
     public MenuItem getDarkTheme() {
         return darkTheme;
     }
+
     public MenuItem getBlueTheme() {
         return blueTheme;
     }
+
     public MenuItem getYellowTheme() {
         return yellowTheme;
     }
@@ -184,8 +194,8 @@ public class MainController {
     }
 
     @FXML
-    void leaderboardShowHandler(ActionEvent event) {
-
+    void leaderboardShowHandler(ActionEvent events) throws IOException {
+        createLeaderBoard();
     }
 
     @FXML
@@ -214,7 +224,6 @@ public class MainController {
         alertHtp.setContentText(content);
         alertHtp.showAndWait();
     }
-    //Menu handler stop
 
     @FXML
     void nButtonHandler(ActionEvent event) {
@@ -225,6 +234,7 @@ public class MainController {
         alertHtp.setResizable(true);
         alertHtp.showAndWait();
     }
+    //Menu handler stop
 
     @FXML
     void aboutHandler(ActionEvent event) {
@@ -261,5 +271,25 @@ public class MainController {
             }
         }
         game.update(gameG, clock);
+    }
+
+    public static void createLeaderBoard() throws IOException {
+        Stage                 stage  = new Stage();
+        FXMLLoader            loader = new FXMLLoader(Test.class.getResource("leaderboard.fxml"));
+        Parent                root   = loader.load();
+        LeaderBoardController lbc    = loader.getController();
+        lbc.init();
+        Scene scene = new Scene(root);
+        stage.setTitle("LeaderBoard");
+        stage.setMinWidth(625);
+        stage.setOnCloseRequest(event -> {
+            Platform.exit();
+            System.exit(0);
+        });
+        scene.getStylesheets().add(MainApp.class.getResource("dark-theme.css").toExternalForm());
+        stage.getIcons().add(new Image(MainApp.class.getResource("images/taquin.png").toExternalForm()));
+        stage.setScene(scene);
+        stage.show();
+        root.requestFocus();
     }
 }

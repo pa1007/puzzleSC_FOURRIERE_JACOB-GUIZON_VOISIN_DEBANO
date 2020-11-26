@@ -13,86 +13,61 @@ import java.io.IOException;
 
 public class HomeController {
 
-    private PuzzleConsole gameWithoutGUI;
-
     @FXML
-    private TextField gridSize;
+    protected RadioButton   radioButtonWhiteTheme;
     @FXML
-    private RadioButton radioButtonConsole;
+    protected RadioButton   radioButtonDarkTheme;
     @FXML
-    private RadioButton radioButtonNumber;
+    protected RadioButton   radioButtonBlueTheme;
     @FXML
-    private RadioButton radioButtonPicture;
+    protected RadioButton   radioButtonYellowTheme;
+    private   PuzzleConsole gameWithoutGUI;
     @FXML
-    protected RadioButton radioButtonWhiteTheme;
+    private   TextField     gridSize;
     @FXML
-    protected RadioButton radioButtonDarkTheme;
+    private   RadioButton   radioButtonConsole;
     @FXML
-    protected RadioButton radioButtonBlueTheme;
+    private   RadioButton   radioButtonNumber;
     @FXML
-    protected RadioButton radioButtonYellowTheme;
+    private   RadioButton   radioButtonPicture;
     @FXML
-    private Button newGame;
+    private   Button        newGame;
 
 
     public String getGridSize() {
         return gridSize.getText();
     }
+
     public boolean getRadioButtonConsole() {
         return radioButtonConsole.isSelected();
     }
+
     public boolean getRadioButtonNumber() {
         return radioButtonNumber.isSelected();
     }
+
     public boolean getRadioButtonPicture() {
         return radioButtonPicture.isSelected();
     }
+
     public boolean getRadioButtonWhiteTheme() {
         return radioButtonWhiteTheme.isSelected();
     }
+
     public boolean getRadioButtonDarkTheme() {
         return radioButtonDarkTheme.isSelected();
     }
+
     public boolean getRadioButtonBlueTheme() {
         return radioButtonBlueTheme.isSelected();
     }
+
     public boolean getRadioButtonYellowTheme() {
         return radioButtonYellowTheme.isSelected();
     }
+
     public Button getNewGame() {
         return newGame;
-    }
-
-
-    @FXML
-    private void initialize () throws IOException {
-        ToggleGroup theme = new ToggleGroup();
-        ToggleGroup gui = new ToggleGroup();
-        radioButtonWhiteTheme.setToggleGroup(theme);
-        radioButtonDarkTheme.setSelected(true);
-        radioButtonDarkTheme.setToggleGroup(theme);
-        radioButtonBlueTheme.setToggleGroup(theme);
-        radioButtonYellowTheme.setToggleGroup(theme);
-        radioButtonConsole.setToggleGroup(gui);
-        radioButtonNumber.setToggleGroup(gui);
-        radioButtonPicture.setToggleGroup(gui);
-        radioButtonPicture.setSelected(true);
-    }
-
-    @FXML
-    void aboutHandler(ActionEvent event) {
-        Alert alertAbout = new Alert(Alert.AlertType.INFORMATION);
-        alertAbout.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alertAbout.setTitle("About");
-        alertAbout.setResizable(true);
-        alertAbout.setHeaderText("About");
-        String content = String.format("Java version : 14 \n"
-                +
-                "Auteur : Paul-Alexandre FOURRIERE | Paul DEBANO | Louis VOISIN | Amelie JACOB--GUIZON \n"
-                +
-                "Produit dans le cadre du cours Ingenierie logiciel de L3 MIASHS SC");
-        alertAbout.setContentText(content);
-        alertAbout.showAndWait();
     }
 
     @FXML
@@ -102,9 +77,9 @@ public class HomeController {
 
     @FXML
     public void loadGameHandler(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        File game = fc.showOpenDialog(null);
-        if(game != null) {
+        FileChooser fc   = new FileChooser();
+        File        game = fc.showOpenDialog(null);
+        if (game != null) {
             game.getAbsolutePath();
         }
     }
@@ -117,9 +92,9 @@ public class HomeController {
 
     @FXML
     public void chooseImageHandler(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        File image = fc.showOpenDialog(null);
-        if(image != null) {
+        FileChooser fc    = new FileChooser();
+        File        image = fc.showOpenDialog(null);
+        if (image != null) {
             image.getAbsolutePath();
         }
     }
@@ -131,6 +106,41 @@ public class HomeController {
             gameWithoutGUI = new PuzzleConsole(4,4);
             gameWithoutGUI.init();
         }*/
+    }
+
+    public void leaderboardShowHandler(ActionEvent actionEvent) throws IOException {
+        MainController.createLeaderBoard();
+    }
+
+    @FXML
+    void aboutHandler(ActionEvent event) {
+        Alert alertAbout = new Alert(Alert.AlertType.INFORMATION);
+        alertAbout.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alertAbout.setTitle("About");
+        alertAbout.setResizable(true);
+        alertAbout.setHeaderText("About");
+        String content = String.format("Java version : 14 \n"
+                                       +
+                                       "Auteur : Paul-Alexandre FOURRIERE | Paul DEBANO | Louis VOISIN | Amelie JACOB--GUIZON \n"
+                                       +
+                                       "Produit dans le cadre du cours Ingenierie logiciel de L3 MIASHS SC");
+        alertAbout.setContentText(content);
+        alertAbout.showAndWait();
+    }
+
+    @FXML
+    private void initialize() throws IOException {
+        ToggleGroup theme = new ToggleGroup();
+        ToggleGroup gui   = new ToggleGroup();
+        radioButtonWhiteTheme.setToggleGroup(theme);
+        radioButtonDarkTheme.setSelected(true);
+        radioButtonDarkTheme.setToggleGroup(theme);
+        radioButtonBlueTheme.setToggleGroup(theme);
+        radioButtonYellowTheme.setToggleGroup(theme);
+        radioButtonConsole.setToggleGroup(gui);
+        radioButtonNumber.setToggleGroup(gui);
+        radioButtonPicture.setToggleGroup(gui);
+        radioButtonPicture.setSelected(true);
     }
 
 }

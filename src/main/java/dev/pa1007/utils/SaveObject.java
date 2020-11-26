@@ -29,7 +29,7 @@ public class SaveObject implements Serializable {
         return puzzle;
     }
 
-    public Boolean getGraph() {
+    public boolean getGraph() {
         return graph;
     }
 
