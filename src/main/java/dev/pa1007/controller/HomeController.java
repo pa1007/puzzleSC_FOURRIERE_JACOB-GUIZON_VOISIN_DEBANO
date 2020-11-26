@@ -4,9 +4,11 @@ import dev.pa1007.game.PuzzleConsole;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +17,22 @@ import java.io.IOException;
 public class HomeController {
 
     private PuzzleConsole gameWithoutGUI;
+
+    @FXML
+    void aboutHandler(ActionEvent event) {
+        Alert alertAbout = new Alert(Alert.AlertType.INFORMATION);
+        alertAbout.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alertAbout.setTitle("About");
+        alertAbout.setResizable(true);
+        alertAbout.setHeaderText("About");
+        String content = String.format("Java version : 14 \n"
+                +
+                "Auteur : Paul-Alexandre FOURRIERE | Paul DEBANO | Louis VOISIN | Amelie JACOB--GUIZON \n"
+                +
+                "Produit dans le cadre du cours Ingenierie logiciel de L3 MIASHS SC");
+        alertAbout.setContentText(content);
+        alertAbout.showAndWait();
+    }
 
     @FXML
     private TextField gridSize;
