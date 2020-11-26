@@ -59,13 +59,14 @@ public class HomeController {
         ToggleGroup theme = new ToggleGroup();
         ToggleGroup gui = new ToggleGroup();
         radioButtonWhiteTheme.setToggleGroup(theme);
-        radioButtonWhiteTheme.setSelected(true);
+        radioButtonDarkTheme.setSelected(true);
         radioButtonDarkTheme.setToggleGroup(theme);
         radioButtonBlueTheme.setToggleGroup(theme);
         radioButtonYellowTheme.setToggleGroup(theme);
         radioButtonConsole.setToggleGroup(gui);
         radioButtonNumber.setToggleGroup(gui);
         radioButtonPicture.setToggleGroup(gui);
+        radioButtonPicture.setSelected(true);
     }
 
     @FXML
@@ -99,9 +100,27 @@ public class HomeController {
 
     @FXML
     public void newGameHandler(ActionEvent event) throws IOException {
-        String stringSize = gridSize.getText();
-        if(!stringSize.isEmpty()) {
-            int intSize = Integer.parseInt(stringSize);
+        if(radioButtonConsole.isSelected()) {
+            // Lancer le jeu en console
+        } else {
+            if (radioButtonNumber.isSelected()) {
+            // Lancer le jeu uniquement avec les numéros (sans image)
+            } else if(radioButtonPicture.isSelected()) {
+                // Lancer le jeu avec image
+                String stringSize = gridSize.getText();
+                if (!stringSize.isEmpty()) {
+                    int intSize = Integer.parseInt(stringSize);
+                }
+                if (radioButtonWhiteTheme.isSelected()) {
+                    // Appliquer le thème blanc à la fenêtre de jeu
+                } else if (radioButtonDarkTheme.isSelected()) {
+                    // Appliquer le thème dark à la fenêtre de jeu
+                } else if (radioButtonBlueTheme.isSelected()) {
+                    // Appliquer le thème bleu à la fenêtre de jeu
+                } else if (radioButtonYellowTheme.isSelected()) {
+                    // Appliquer le thème jaune à la fenêtre de jeu
+                }
+            }
         }
         //System.out.println(getWithGUI());
         //System.out.println(getWithImage());
