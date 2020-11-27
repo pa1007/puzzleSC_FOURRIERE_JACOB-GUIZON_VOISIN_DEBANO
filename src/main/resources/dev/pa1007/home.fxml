@@ -73,21 +73,9 @@
                 <Image url="@images/taquin.png"/>
             </image>
         </ImageView>
-        <RadioButton fx:id="radioButtonConsole" layoutX="43.0" layoutY="139.0" mnemonicParsing="false"
-                     text="Play with the console"/>
-        <RadioButton fx:id="radioButtonPicture" layoutX="43.0" layoutY="192.0" mnemonicParsing="false"
-                     text="Play with a picture"/>
-        <RadioButton fx:id="radioButtonNumber" layoutX="43.0" layoutY="165.0" mnemonicParsing="false"
-                     text="Play with number only"/>
-        <Label layoutX="46.0" layoutY="211.0" prefHeight="17.0" prefWidth="139.0" text="Choose a theme :">
-            <font>
-                <Font name="System Bold" size="16.0"/>
-            </font>
-        </Label>
-        <RadioButton fx:id="radioButtonDarkTheme" layoutX="46.0" layoutY="260.0" mnemonicParsing="false" text="Dark theme" />
-        <RadioButton fx:id="radioButtonBlueTheme" layoutX="46.0" layoutY="286.0" mnemonicParsing="false" text="Blue theme" />
-        <RadioButton fx:id="radioButtonYellowTheme" layoutX="46.0" layoutY="311.0" mnemonicParsing="false" text="Yellow theme" />
-        <RadioButton fx:id="radioButtonWhiteTheme" layoutX="46.0" layoutY="236.0" mnemonicParsing="false" text="White theme" />
+        <RadioButton fx:id="radioButtonConsole" layoutX="43.0" layoutY="165.0" mnemonicParsing="false" text="Play with the console" />
+        <RadioButton fx:id="radioButtonPicture" layoutX="43.0" layoutY="200.0" mnemonicParsing="false" text="Play with a picture" />
+        <RadioButton fx:id="radioButtonNumber" layoutX="43.0" layoutY="235.0" mnemonicParsing="false" text="Play with number only" />
       <Label fx:id="nomChemin" layoutX="187.0" layoutY="148.0" prefHeight="17.0" prefWidth="339.0" />
     </children>
 </AnchorPane>

@@ -17,14 +17,6 @@ import java.io.IOException;
 public class HomeController {
 
     private   String        imagePath;
-    @FXML
-    protected RadioButton   radioButtonWhiteTheme;
-    @FXML
-    protected RadioButton   radioButtonDarkTheme;
-    @FXML
-    protected RadioButton   radioButtonBlueTheme;
-    @FXML
-    protected RadioButton   radioButtonYellowTheme;
     private   PuzzleConsole gameWithoutGUI;
     @FXML
     private   TextField     gridSize;
@@ -66,22 +58,6 @@ public class HomeController {
 
     public boolean getRadioButtonPicture() {
         return radioButtonPicture.isSelected();
-    }
-
-    public boolean getRadioButtonWhiteTheme() {
-        return radioButtonWhiteTheme.isSelected();
-    }
-
-    public boolean getRadioButtonDarkTheme() {
-        return radioButtonDarkTheme.isSelected();
-    }
-
-    public boolean getRadioButtonBlueTheme() {
-        return radioButtonBlueTheme.isSelected();
-    }
-
-    public boolean getRadioButtonYellowTheme() {
-        return radioButtonYellowTheme.isSelected();
     }
 
     public Button getNewGame() {
@@ -164,13 +140,7 @@ public class HomeController {
 
     @FXML
     private void initialize() throws IOException {
-        ToggleGroup theme = new ToggleGroup();
         ToggleGroup gui   = new ToggleGroup();
-        radioButtonWhiteTheme.setToggleGroup(theme);
-        radioButtonDarkTheme.setSelected(true);
-        radioButtonDarkTheme.setToggleGroup(theme);
-        radioButtonBlueTheme.setToggleGroup(theme);
-        radioButtonYellowTheme.setToggleGroup(theme);
         radioButtonConsole.setToggleGroup(gui);
         radioButtonNumber.setToggleGroup(gui);
         radioButtonPicture.setToggleGroup(gui);

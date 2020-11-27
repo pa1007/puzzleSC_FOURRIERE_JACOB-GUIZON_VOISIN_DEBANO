@@ -43,32 +43,17 @@ public class MainApp extends Application {
         stage.show();
 
         sceneHomePage.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
+        sceneGame.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
         rootHome.requestFocus();
 
         Button newGame = Homecontroller.getNewGame();
         newGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                boolean whiteTheme = Homecontroller.getRadioButtonWhiteTheme();
-                boolean darkTheme = Homecontroller.getRadioButtonDarkTheme();
-                boolean blueTheme = Homecontroller.getRadioButtonBlueTheme();
-                boolean yellowTheme = Homecontroller.getRadioButtonYellowTheme();
                 boolean console = Homecontroller.getRadioButtonConsole();
                 boolean number = Homecontroller.getRadioButtonNumber();
                 boolean picture = Homecontroller.getRadioButtonPicture();
-                if (whiteTheme) {
-                    sceneGame.getStylesheets().clear();
-                    sceneGame.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
-                } else if (darkTheme) {
-                    sceneGame.getStylesheets().clear();
-                    sceneGame.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
-                } else if (blueTheme) {
-                    sceneGame.getStylesheets().clear();
-                    sceneGame.getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
-                } else if (yellowTheme) {
-                    sceneGame.getStylesheets().clear();
-                    sceneGame.getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
-                }
+
                 if (console) {
                     /*stage.close();
                     PuzzleConsole p = new PuzzleConsole(4,4);
@@ -150,6 +135,8 @@ public class MainApp extends Application {
             public void handle(ActionEvent event) {
                 sceneHomePage.getStylesheets().clear();
                 sceneHomePage.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+                sceneGame.getStylesheets().clear();
+                sceneGame.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
             }
         });
         darkThemeHome.setOnAction(new EventHandler<ActionEvent>() {
@@ -157,6 +144,8 @@ public class MainApp extends Application {
             public void handle(ActionEvent event) {
                 sceneHomePage.getStylesheets().clear();
                 sceneHomePage.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
+                sceneGame.getStylesheets().clear();
+                sceneGame.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
             }
         });
         blueThemeHome.setOnAction(new EventHandler<ActionEvent>() {
@@ -164,6 +153,8 @@ public class MainApp extends Application {
             public void handle(ActionEvent event) {
                 sceneHomePage.getStylesheets().clear();
                 sceneHomePage.getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
+                sceneGame.getStylesheets().clear();
+                sceneGame.getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
             }
         });
         yellowThemeHome.setOnAction(new EventHandler<ActionEvent>() {
@@ -171,6 +162,8 @@ public class MainApp extends Application {
             public void handle(ActionEvent event) {
                 sceneHomePage.getStylesheets().clear();
                 sceneHomePage.getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
+                sceneGame.getStylesheets().clear();
+                sceneGame.getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
             }
         });
 
