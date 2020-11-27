@@ -109,36 +109,68 @@ public class MainApp extends Application {
                 }
             }
         });
-        MenuItem whiteTheme = mainController.getWhiteTheme();
-        MenuItem darkTheme = mainController.getDarkTheme();
-        MenuItem blueTheme = mainController.getBlueTheme();
-        MenuItem yellowTheme = mainController.getYellowTheme();
-        whiteTheme.setOnAction(new EventHandler<ActionEvent>() {
+        MenuItem whiteThemeMain = mainController.getWhiteTheme();
+        MenuItem darkThemeMain = mainController.getDarkTheme();
+        MenuItem blueThemeMain = mainController.getBlueTheme();
+        MenuItem yellowThemeMain = mainController.getYellowTheme();
+        MenuItem whiteThemeHome = Homecontroller.getWhiteTheme();
+        MenuItem darkThemeHome = Homecontroller.getDarkTheme();
+        MenuItem blueThemeHome = Homecontroller.getBlueTheme();
+        MenuItem yellowThemeHome = Homecontroller.getYellowTheme();
+        whiteThemeMain.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 sceneGame.getStylesheets().clear();
                 sceneGame.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
             }
         });
-        darkTheme.setOnAction(new EventHandler<ActionEvent>() {
+        darkThemeMain.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 sceneGame.getStylesheets().clear();
                 sceneGame.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
             }
         });
-        blueTheme.setOnAction(new EventHandler<ActionEvent>() {
+        blueThemeMain.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 sceneGame.getStylesheets().clear();
                 sceneGame.getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
             }
         });
-        yellowTheme.setOnAction(new EventHandler<ActionEvent>() {
+        yellowThemeMain.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 sceneGame.getStylesheets().clear();
                 sceneGame.getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
+            }
+        });
+        whiteThemeHome.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                sceneHomePage.getStylesheets().clear();
+                sceneHomePage.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+            }
+        });
+        darkThemeHome.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                sceneHomePage.getStylesheets().clear();
+                sceneHomePage.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
+            }
+        });
+        blueThemeHome.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                sceneHomePage.getStylesheets().clear();
+                sceneHomePage.getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
+            }
+        });
+        yellowThemeHome.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                sceneHomePage.getStylesheets().clear();
+                sceneHomePage.getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
             }
         });
 

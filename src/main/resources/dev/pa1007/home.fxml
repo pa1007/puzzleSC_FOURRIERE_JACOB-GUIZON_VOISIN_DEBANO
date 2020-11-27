@@ -22,7 +22,15 @@
                                                     shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem mnemonicParsing="false" onAction="#quitHandler" text="Quit"/>
+                  <Menu mnemonicParsing="false" text="Change theme">
+                    <items>
+                        <MenuItem fx:id="whiteTheme" mnemonicParsing="false" text="White theme" />
+                        <MenuItem fx:id="darkTheme" mnemonicParsing="false" text="Dark theme" />
+                      <MenuItem fx:id="blueTheme" mnemonicParsing="false" text="Blue theme" />
+                        <MenuItem fx:id="yellowTheme" mnemonicParsing="false" text="Yellow theme" />
+                    </items>
+                  </Menu>
+                        <MenuItem mnemonicParsing="false" onAction="#quitHandler" text="Quit" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Leaderboard">
@@ -76,13 +84,10 @@
                 <Font name="System Bold" size="16.0"/>
             </font>
         </Label>
-        <RadioButton fx:id="radioButtonDarkTheme" layoutX="46.0" layoutY="260.0" mnemonicParsing="false"
-                     text="Dark theme"/>
-        <RadioButton fx:id="radioButtonBlueTheme" layoutX="46.0" layoutY="286.0" mnemonicParsing="false"
-                     text="Blue theme"/>
-        <RadioButton fx:id="radioButtonYellowTheme" layoutX="46.0" layoutY="311.0" mnemonicParsing="false"
-                     text="Yellow theme"/>
-        <RadioButton fx:id="radioButtonWhiteTheme" layoutX="46.0" layoutY="236.0" mnemonicParsing="false"
-                     text="White theme"/>
+        <RadioButton fx:id="radioButtonDarkTheme" layoutX="46.0" layoutY="260.0" mnemonicParsing="false" text="Dark theme" />
+        <RadioButton fx:id="radioButtonBlueTheme" layoutX="46.0" layoutY="286.0" mnemonicParsing="false" text="Blue theme" />
+        <RadioButton fx:id="radioButtonYellowTheme" layoutX="46.0" layoutY="311.0" mnemonicParsing="false" text="Yellow theme" />
+        <RadioButton fx:id="radioButtonWhiteTheme" layoutX="46.0" layoutY="236.0" mnemonicParsing="false" text="White theme" />
+      <Label fx:id="nomChemin" layoutX="187.0" layoutY="148.0" prefHeight="17.0" prefWidth="339.0" />
     </children>
 </AnchorPane>

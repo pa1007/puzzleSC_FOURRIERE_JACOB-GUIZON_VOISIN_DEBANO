@@ -36,6 +36,16 @@ public class HomeController {
     private   RadioButton   radioButtonPicture;
     @FXML
     private   Button        newGame;
+    @FXML
+    private   MenuItem      whiteTheme;
+    @FXML
+    private   MenuItem      darkTheme;
+    @FXML
+    private   MenuItem      blueTheme;
+    @FXML
+    private   MenuItem      yellowTheme;
+    @FXML
+    private   Label         nomChemin;
 
 
     public String getImagePath() {
@@ -76,6 +86,22 @@ public class HomeController {
 
     public Button getNewGame() {
         return newGame;
+    }
+
+    public MenuItem getWhiteTheme() {
+        return whiteTheme;
+    }
+
+    public MenuItem getDarkTheme() {
+        return darkTheme;
+    }
+
+    public MenuItem getBlueTheme() {
+        return blueTheme;
+    }
+
+    public MenuItem getYellowTheme() {
+        return yellowTheme;
     }
 
     @FXML
@@ -150,5 +176,4 @@ public class HomeController {
         radioButtonPicture.setToggleGroup(gui);
         radioButtonPicture.setSelected(true);
     }
-
 }
