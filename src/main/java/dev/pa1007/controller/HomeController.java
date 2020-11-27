@@ -5,6 +5,9 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import java.io.File;
@@ -13,6 +16,7 @@ import java.io.IOException;
 
 public class HomeController {
 
+    private   String        imagePath;
     @FXML
     protected RadioButton   radioButtonWhiteTheme;
     @FXML
@@ -33,6 +37,10 @@ public class HomeController {
     @FXML
     private   Button        newGame;
 
+
+    public String getImagePath() {
+        return imagePath;
+    }
 
     public String getGridSize() {
         return gridSize.getText();
@@ -79,9 +87,6 @@ public class HomeController {
     public void loadGameHandler(ActionEvent event) {
         FileChooser fc   = new FileChooser();
         File        game = fc.showOpenDialog(null);
-        if (game != null) {
-            game.getAbsolutePath();
-        }
     }
 
     @FXML
@@ -93,9 +98,12 @@ public class HomeController {
     @FXML
     public void chooseImageHandler(ActionEvent event) {
         FileChooser fc    = new FileChooser();
+        fc.setTitle("Choose image");
         File        image = fc.showOpenDialog(null);
-        if (image != null) {
-            image.getAbsolutePath();
+        if (image.canRead()) {
+            System.out.println(image.getPath());
+            imagePath = image.getPath();
+            nomChemin.setText(imagePath);
         }
     }
 

@@ -41,7 +41,7 @@ public class PuzzleGraphic extends Puzzle {
 
     public PuzzleGraphic(int maxX, int maxY) {
         super(maxX, maxY);
-        this.imagePath = URLDecoder.decode(MainApp.class.getResource("images/fond.jpg").getPath(), StandardCharsets.UTF_8);
+        this.imagePath = URLDecoder.decode(MainApp.class.getResource("images/taquin.png").getPath(), StandardCharsets.UTF_8);
     }
 
     public PuzzleGraphic(int maxX, int maxY, String imagePath) {

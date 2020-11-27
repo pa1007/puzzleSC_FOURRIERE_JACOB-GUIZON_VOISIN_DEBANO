@@ -56,20 +56,20 @@ public class MainApp extends Application {
                 boolean console = Homecontroller.getRadioButtonConsole();
                 boolean number = Homecontroller.getRadioButtonNumber();
                 boolean picture = Homecontroller.getRadioButtonPicture();
-                if(whiteTheme) {
+                if (whiteTheme) {
                     sceneGame.getStylesheets().clear();
                     sceneGame.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
                 } else if (darkTheme) {
                     sceneGame.getStylesheets().clear();
                     sceneGame.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
-                } else if(blueTheme) {
+                } else if (blueTheme) {
                     sceneGame.getStylesheets().clear();
                     sceneGame.getStylesheets().add(getClass().getResource("blue-theme.css").toExternalForm());
-                }else if (yellowTheme) {
+                } else if (yellowTheme) {
                     sceneGame.getStylesheets().clear();
                     sceneGame.getStylesheets().add(getClass().getResource("yellow-theme.css").toExternalForm());
                 }
-                if(console) {
+                if (console) {
                     /*stage.close();
                     PuzzleConsole p = new PuzzleConsole(4,4);
                     p.init();
@@ -77,11 +77,11 @@ public class MainApp extends Application {
                 } else if (number) {
                     int nb = 4;
                     String stringNb = Homecontroller.getGridSize();
-                    if(!stringNb.isBlank()) {
+                    if (!stringNb.isBlank()) {
                         nb = Integer.parseInt(stringNb);
                     }
                     rootGame.requestFocus();
-                    PuzzleGraphic game       = new PuzzleGraphic(nb, nb);
+                    PuzzleGraphic game = new PuzzleGraphic(nb, nb);
                     game.setNumberOnly(true);
                     game.init();
                     mainController.setGame(game);
@@ -89,14 +89,22 @@ public class MainApp extends Application {
                 } else if (picture) {
                     int nb = 4;
                     String stringNb = Homecontroller.getGridSize();
-                    if(!stringNb.isBlank()) {
+                    if (!stringNb.isBlank()) {
                         nb = Integer.parseInt(stringNb);
                     }
                     rootGame.requestFocus();
-                    PuzzleGraphic game       = new PuzzleGraphic(nb, nb);
-                    game.setNumberOnly(false);
-                    game.init();
-                    mainController.setGame(game);
+                    if (Homecontroller.getImagePath() == null) {
+                        PuzzleGraphic game = new PuzzleGraphic(nb, nb);
+                        game.setNumberOnly(false);
+                        game.init();
+                        mainController.setGame(game);
+                    } else {
+                        String imagePath = Homecontroller.getImagePath();
+                        PuzzleGraphic game = new PuzzleGraphic(nb, nb, imagePath);
+                        game.setNumberOnly(false);
+                        game.init();
+                        mainController.setGame(game);
+                    }
                     stage.setScene(sceneGame);
                 }
             }
