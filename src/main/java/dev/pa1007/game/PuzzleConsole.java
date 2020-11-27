@@ -56,18 +56,18 @@ public class PuzzleConsole extends Puzzle {
         String  s;
         while (!this.isSolved()) {
             System.out.println(this.createString());
-            System.out.println("[g] l | [d] → | [h] ↑ | [b] ↓ | [s] sauvegarder | [c] charger");
+            System.out.println("[z] ↑ | [q] <- | [s] ↓ | [d] → | [f] sauvegarder | [c] charger");
             s = sc.nextLine();
-            while (!(s.equals("g") || s.equals("d") || s.equals("h") || s.equals("b") || s.equals("s") || s.equals("c"))) {
+            while (!(s.equals("q") || s.equals("d") || s.equals("z") || s.equals("s") || s.equals("f") || s.equals("c"))) {
                 System.out.println("Entrez une valeur correcte");
                 s = sc.nextLine();
             }
             switch (s.toLowerCase()) {
-                case "b" -> move(1, 0);
-                case "h" -> move(-1, 0);
+                case "s" -> move(1, 0);
+                case "z" -> move(-1, 0);
                 case "d" -> move(0, 1);
-                case "g" -> move(0, -1);
-                case "s" -> {
+                case "q" -> move(0, -1);
+                case "f" -> {
                     try {
                         Save.save(this);
                     }
