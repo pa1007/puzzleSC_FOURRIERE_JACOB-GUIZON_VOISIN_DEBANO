@@ -25,8 +25,8 @@ public class PuzzleConsole extends Puzzle {
 
     public void initStringBlock(int x, int y) {
         blocks = new ArrayList<>();
-        int pos = 0;
-        int max = x * y - 1;
+        int pos = 1;
+        int max = x * y ;
         for (int i = 0; i < y; i++) {
             for (int j = 0; j < x; j++) {
                 blocks.add(new BlockString(pos, new Position(i, j)));
@@ -39,9 +39,9 @@ public class PuzzleConsole extends Puzzle {
     }
 
     public void initGame(int x, int y) {
-        Collections.shuffle(blocks);
         this.voidBlock = new BlockVoid(new Position(x - 1, y - 1));
         blocks.add(voidBlock);
+        Collections.shuffle(blocks);
         int tot = 0;
         for (int i = 0; i < y; i++) {
             for (int j = 0; j < x; j++) {

@@ -73,8 +73,8 @@ public class PuzzleGraphic extends Puzzle {
         read.getGraphics().drawImage(scaledInstance, 0, 0, null);
         int h   = read.getHeight() / maxX - 1;
         int w   = read.getWidth() / maxY - 1;
-        int nb  = 0;
-        int max = (maxX * maxY) - 1;
+        int nb  = 1;
+        int max = (maxX * maxY) ;
         for (int j = 0; j < WIDTH && nb != max; j += w) {
             for (int i = 0; i < HEIGHT; i += h) {
                 int dh = h;
@@ -215,9 +215,9 @@ public class PuzzleGraphic extends Puzzle {
     }
 
     private void initGameGraph() {
-        Collections.shuffle(blocks);
         this.voidBlock = new BlockVoid(new Position(maxX - 1, maxY - 1));
         blocks.add(voidBlock);
+        Collections.shuffle(blocks);
         int tot = 0;
         for (int i = 0; i < maxY; i++) {
             for (int j = 0; j < maxX; j++) {
