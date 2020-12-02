@@ -25,7 +25,7 @@ public class MainApp extends Application {
         Parent             rootGame       = loaderGame.load();
         Parent             rootHome      = loaderHome.load();
         MainController mainController = loaderGame.getController();
-        HomeController Homecontroller = loaderHome.getController();
+        HomeController homecontroller = loaderHome.getController();
         stage.setTitle("Taquin");
         /*stage.setMinWidth(625);
         stage.setMinHeight(775);*/
@@ -46,13 +46,13 @@ public class MainApp extends Application {
         sceneGame.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
         rootHome.requestFocus();
 
-        Button newGame = Homecontroller.getNewGame();
+        Button newGame = homecontroller.getNewGame();
         newGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                boolean console = Homecontroller.getRadioButtonConsole();
-                boolean number = Homecontroller.getRadioButtonNumber();
-                boolean picture = Homecontroller.getRadioButtonPicture();
+                boolean console = homecontroller.getRadioButtonConsole();
+                boolean number = homecontroller.getRadioButtonNumber();
+                boolean picture = homecontroller.getRadioButtonPicture();
 
                 if (console) {
                     /*stage.close();
@@ -61,7 +61,7 @@ public class MainApp extends Application {
                     p.startGameLine();*/
                 } else if (number) {
                     int nb = 4;
-                    String stringNb = Homecontroller.getGridSize();
+                    String stringNb = homecontroller.getGridSize();
                     if (!stringNb.isBlank()) {
                         nb = Integer.parseInt(stringNb);
                     }
@@ -73,18 +73,18 @@ public class MainApp extends Application {
                     stage.setScene(sceneGame);
                 } else if (picture) {
                     int nb = 4;
-                    String stringNb = Homecontroller.getGridSize();
+                    String stringNb = homecontroller.getGridSize();
                     if (!stringNb.isBlank()) {
                         nb = Integer.parseInt(stringNb);
                     }
                     rootGame.requestFocus();
-                    if (Homecontroller.getImagePath() == null) {
+                    if (homecontroller.getImagePath() == null) {
                         PuzzleGraphic game = new PuzzleGraphic(nb, nb);
                         game.setNumberOnly(false);
                         game.init();
                         mainController.setGame(game);
                     } else {
-                        String imagePath = Homecontroller.getImagePath();
+                        String imagePath = homecontroller.getImagePath();
                         PuzzleGraphic game = new PuzzleGraphic(nb, nb, imagePath);
                         game.setNumberOnly(false);
                         game.init();
@@ -98,10 +98,10 @@ public class MainApp extends Application {
         MenuItem darkThemeMain = mainController.getDarkTheme();
         MenuItem blueThemeMain = mainController.getBlueTheme();
         MenuItem yellowThemeMain = mainController.getYellowTheme();
-        MenuItem whiteThemeHome = Homecontroller.getWhiteTheme();
-        MenuItem darkThemeHome = Homecontroller.getDarkTheme();
-        MenuItem blueThemeHome = Homecontroller.getBlueTheme();
-        MenuItem yellowThemeHome = Homecontroller.getYellowTheme();
+        MenuItem whiteThemeHome = homecontroller.getWhiteTheme();
+        MenuItem darkThemeHome = homecontroller.getDarkTheme();
+        MenuItem blueThemeHome = homecontroller.getBlueTheme();
+        MenuItem yellowThemeHome = homecontroller.getYellowTheme();
         whiteThemeMain.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -167,11 +167,20 @@ public class MainApp extends Application {
             }
         });
 
-        /*Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("dark-theme.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
-        root.requestFocus();*/
+        MenuItem newGameMain = mainController.getNewGameMain();
+        newGameMain.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                mainController.getGameG().getChildren().clear();
+                PuzzleGraphic game1 = new PuzzleGraphic(4, 4);
+                mainController.getGame().stopTimer();
+                mainController.setGame2(game1);
+                mainController.getGame().init();
+                mainController.getGame().update(mainController.getGameG(), mainController.getClock());
+                mainController.setCount(0);
+                stage.setScene(sceneHomePage);
+            }
+        });
     }
 
     public static void main(String[] args) {

@@ -109,15 +109,6 @@ public class HomeController {
         }
     }
 
-    @FXML
-    public void newGameHandler(ActionEvent event) {
-
-        /*if(getWithGUI()) {
-            gameWithoutGUI = new PuzzleConsole(4,4);
-            gameWithoutGUI.init();
-        }*/
-    }
-
     public void leaderboardShowHandler(ActionEvent actionEvent) throws IOException {
         MainController.createLeaderBoard();
     }

@@ -29,7 +29,7 @@ import java.io.IOException;
 public class MainController {
 
     private PuzzleGraphic game;
-    private int           count = 0;
+    private int           count;
 
     @FXML
     private MenuItem startAIItem;
@@ -51,6 +51,8 @@ public class MainController {
     private MenuItem blueTheme;
     @FXML
     private MenuItem yellowTheme;
+    @FXML
+    private MenuItem newGameMain;
 
 
     public MenuItem getWhiteTheme() {
@@ -69,9 +71,28 @@ public class MainController {
         return yellowTheme;
     }
 
+    public MenuItem getNewGameMain() {
+        return newGameMain;
+    }
 
     public GridPane getGameG() {
         return gameG;
+    }
+
+    public Text     getClock() {
+        return clock;
+    }
+
+    public PuzzleGraphic getGame() {
+        return game;
+    }
+
+    public void setGame2(PuzzleGraphic game) {
+        this.game = game;
+    }
+
+    public void     setCount(int i) {
+        count = i;
     }
 
     public void setGame(PuzzleGraphic game) {
@@ -83,11 +104,6 @@ public class MainController {
         game.stopTimer();
     }
 
-    @FXML
-    public void quit(ActionEvent event) {
-        Platform.exit();
-        System.exit(0);
-    }
 
     public void moveUP(ActionEvent actionEvent) {
         this.game.move(-1, 0);
@@ -110,7 +126,7 @@ public class MainController {
     }
 
     @FXML
-    void onKeyPressed(KeyEvent event) {
+    void onKeyPressed(KeyEvent event) throws IOException {
         switch (event.getCode()) {
             case DOWN -> this.game.move(1, 0);
             case UP -> this.game.move(-1, 0);
@@ -125,6 +141,19 @@ public class MainController {
         }
         if (this.game.isSolved()) {
             this.game.stopTimer();
+            Stage                 stage  = new Stage();
+            FXMLLoader            loader = new FXMLLoader(Test.class.getResource("win.fxml"));
+            Parent                root   = loader.load();
+            WinController winController  = loader.getController();
+            Scene scene = new Scene(root);
+            stage.setTitle("You Won !");
+            stage.setMinWidth(625);
+            scene.getStylesheets().add(MainApp.class.getResource("dark-theme.css").toExternalForm());
+            stage.getIcons().add(new Image(MainApp.class.getResource("images/taquin.png").toExternalForm()));
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+            root.requestFocus();
         }
     }
 
@@ -134,8 +163,8 @@ public class MainController {
         gameG.getChildren().clear();
         PuzzleGraphic game1 = new PuzzleGraphic(4, 4);
         game1.init();
-        game.stopTimer();
         this.game = game1;
+        game.stopTimer();
         game.update(gameG, this.clock);
         count = 0;
     }
@@ -171,6 +200,12 @@ public class MainController {
             a.show();
         }
 
+    }
+
+    @FXML
+    public void quit(ActionEvent event) {
+        Platform.exit();
+        System.exit(0);
     }
 
     @FXML
@@ -282,12 +317,9 @@ public class MainController {
         Scene scene = new Scene(root);
         stage.setTitle("LeaderBoard");
         stage.setMinWidth(625);
-        stage.setOnCloseRequest(event -> {
-            Platform.exit();
-            System.exit(0);
-        });
         scene.getStylesheets().add(MainApp.class.getResource("dark-theme.css").toExternalForm());
         stage.getIcons().add(new Image(MainApp.class.getResource("images/taquin.png").toExternalForm()));
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
         root.requestFocus();

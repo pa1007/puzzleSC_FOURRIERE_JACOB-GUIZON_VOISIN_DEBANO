@@ -30,7 +30,7 @@
                      AnchorPane.topAnchor="0.0">
 
                 <Menu text="Game">
-                    <MenuItem mnemonicParsing="false" onAction="#newGameHandler" text="New game">
+                    <MenuItem fx:id="newGameMain" mnemonicParsing="false" onAction="#newGameHandler" text="New game">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
                         </accelerator>
@@ -138,7 +138,7 @@
             </Text>
         </center>
       <right>
-         <Label fx:id="shiftingLabel" prefHeight="17.0" prefWidth="96.0" text="Shifting : " BorderPane.alignment="CENTER">
+         <Label fx:id="shiftingLabel" prefHeight="17.0" prefWidth="96.0" text="Move : " BorderPane.alignment="CENTER">
             <font>
                <Font size="16.0" />
             </font>
