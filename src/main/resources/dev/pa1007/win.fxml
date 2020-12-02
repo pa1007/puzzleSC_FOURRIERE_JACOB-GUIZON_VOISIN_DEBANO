@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.pa1007.controller.WinController">
+   <children>
+      <ProgressIndicator layoutX="280.0" layoutY="225.0" progress="1.0" />
+      <Label layoutX="95.0" layoutY="79.0" prefHeight="101.0" prefWidth="410.0" text="YOU WIN !!">
+         <font>
+            <Font name="Roboto Light" size="72.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="0.5166666666666667" centerY="0.48571428571428565" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.16783422231674194" green="0.8026315569877625" blue="0.04087475687265396" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+      <ImageView fitHeight="141.0" fitWidth="156.0" layoutX="364.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image fx:id="imageYouWon" url="@images/win.jpg" />
+         </image>
+         <effect>
+            <Lighting surfaceScale="10.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <Button fx:id="closeTheGame" layoutX="95.0" layoutY="245.0" mnemonicParsing="false" onAction="#closeTheGameHandler" prefHeight="141.0" prefWidth="141.0" text="Close the game">
+         <effect>
+            <Lighting surfaceScale="10.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="0.8947368264198303" green="0.8947368264198303" blue="0.8947368264198303" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Ellipse fill="#f5f5f5" layoutX="291.0" layoutY="130.0" opacity="0.21" radiusX="241.0" radiusY="80.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <Lighting diffuseConstant="1.03" specularConstant="0.25" surfaceScale="10.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Ellipse>
+   </children>
+</Pane>
