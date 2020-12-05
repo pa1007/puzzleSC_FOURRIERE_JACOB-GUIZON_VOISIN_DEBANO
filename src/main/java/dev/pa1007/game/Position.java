@@ -52,18 +52,31 @@ public class Position implements Serializable {
         this.y = y;
     }
 
+    /**
+     * Compare position with Position passed in param
+     * @param o2 Position
+     * @return Boolean true if Position in param is superior, else false
+     */
     public boolean isSup(Position o2) {
         return o2.x - x + o2.y - y < 0;
     }
 
+    /**
+     * Create new Position with coordinate +- x and y
+     * @param x row
+     * @param y column
+     * @return new Position
+     */
     public Position getNear(int x, int y) {
         return new Position(this.x + x, this.y + y);
     }
 
+    /**
+     * @return List of all Position around this object.
+     */
     public List<Position> getSurrounding() {
         return List.of(getNear(-1, 0), getNear(0, 1), getNear(0, -1), getNear(1, 0));
     }
-
 
     @Override
     public boolean equals(Object o) {

@@ -38,17 +38,30 @@ public class PuzzleGraphic extends Puzzle {
     private transient    Image   image;
     private              String  imagePath;
 
-
+    /**
+     * Create graphical puzzle with default image
+     * @param maxX number of row
+     * @param maxY number of column
+     */
     public PuzzleGraphic(int maxX, int maxY) {
         super(maxX, maxY);
         this.imagePath = URLDecoder.decode(MainApp.class.getResource("images/taquin.png").getPath(), StandardCharsets.UTF_8);
     }
 
+    /**
+     * Create graphical puzzle with custom image
+     * @param maxX number of row
+     * @param maxY number of column
+     * @param imagePath path of the image
+     */
     public PuzzleGraphic(int maxX, int maxY, String imagePath) {
         super(maxX, maxY);
         this.imagePath = imagePath;
     }
 
+    /**
+     * Call initGraphicBlock and initGameGraph to initialise the game
+     */
     @Override
     public void init() {
         blocks = new ArrayList<>();
@@ -61,7 +74,10 @@ public class PuzzleGraphic extends Puzzle {
         }
     }
 
-
+    /**
+     * Initialise the graphical block array
+     * @param path Path of the image
+     */
     public void initGraphicBlock(String path) throws IOException {
         Image scaledInstance = ImageIO.read(new File(path)).getScaledInstance(
                 WIDTH,
@@ -93,6 +109,11 @@ public class PuzzleGraphic extends Puzzle {
         }
     }
 
+    /**
+     * Update the UI
+     * @param gameG GridPane bind to the game
+     * @param clock Clock timer bind to the game
+     */
     public void update(GridPane gameG, Text clock) {
         gameG.getChildren().clear();
         List<Block> posVoid = this.getAroundVoid();
@@ -156,28 +177,48 @@ public class PuzzleGraphic extends Puzzle {
         }
     }
 
+    /**
+     * @return Boolean is the game is number only or not
+     */
     public boolean getNumberOnly() {
         return numberOnly;
     }
 
+    /**
+     *
+     * @param numberOnly set the boolean to make the game number only
+     */
     public void setNumberOnly(boolean numberOnly) {
         this.numberOnly = numberOnly;
     }
 
+    /**
+     * @return Array of blocks who are around the void
+     */
     public List<Block> getAroundVoid() {
         List<Position> p = voidBlock.getCurrentPos().getSurrounding();
         return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(
                 Collectors.toList());
     }
 
+    /**
+     * @return Path of the image
+     */
     public String getImagePath() {
         return imagePath;
     }
 
+    /**
+     * @param imagePath set the image path.
+     */
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
 
+    /**
+     * Set the graphical element with the image in param
+     * @param image image object
+     */
     public void loadImage(Image image) {
         long t = this.timer.getTime();
         this.timer.stop();
@@ -214,6 +255,9 @@ public class PuzzleGraphic extends Puzzle {
         }
     }
 
+    /**
+     * Initialise the game board
+     */
     private void initGameGraph() {
         this.voidBlock = new BlockVoid(new Position(maxX - 1, maxY - 1));
         blocks.add(voidBlock);

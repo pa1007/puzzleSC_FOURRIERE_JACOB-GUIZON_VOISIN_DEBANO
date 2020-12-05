@@ -112,7 +112,6 @@ public abstract class Puzzle implements Serializable {
 
     /**
      * Check if puzzle has been solved.
-     *
      * @return True if the puzzle has been solved and false otherwise.
      */
     public boolean isSolved() {
@@ -121,6 +120,11 @@ public abstract class Puzzle implements Serializable {
 
     public abstract void init();
 
+    /**
+     * Switch between void block and block at position passed in param
+     * @param x row
+     * @param y column
+     */
     public void move(int x, int y) {
         Position p = voidBlock.getCurrentPos().getNear(x, y).clone();
         Block    b = blocks.stream().filter(bCur -> bCur.getCurrentPos().equals(p)).findFirst().orElse(null);

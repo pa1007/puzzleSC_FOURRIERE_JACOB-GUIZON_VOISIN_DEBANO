@@ -83,7 +83,9 @@ public abstract class Block implements Serializable {
         this.number = number;
     }
 
-
+    /**
+     * @return The block stringed
+     */
     @Override
     public String toString() {
         return "Block{" +

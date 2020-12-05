@@ -27,6 +27,9 @@ public class StopwatchTimer extends TimerTask implements Serializable {
         sspTime = new SimpleStringProperty("00:00:00");
     }
 
+    /**
+     * Run the timer thread
+     */
     @Override
     public void run() {
         if (!stop) {
@@ -35,6 +38,10 @@ public class StopwatchTimer extends TimerTask implements Serializable {
         }
     }
 
+    /**
+     * Start the timer
+     * @param time time value where the timer must start
+     */
     public void startTimer(long time) {
         this.time = time;
         if (!timed) {
@@ -45,6 +52,9 @@ public class StopwatchTimer extends TimerTask implements Serializable {
         stop = false;
     }
 
+    /**
+     * Stop the timer
+     */
     public void stop() {
         this.stop = true;
         if (timer != null) {
@@ -54,16 +64,28 @@ public class StopwatchTimer extends TimerTask implements Serializable {
         this.cancel();
     }
 
+    /**
+     * Stop the timer and assign new time value
+     * @param time time value
+     */
     public void stopTimer(long time) {
         this.stop = true;
         this.time = time;
         setTime(time);
     }
 
+    /**
+     * Getter for time value
+     * @return Time
+     */
     public long getTime() {
         return time;
     }
 
+    /**
+     * set time value
+     * @param time time value
+     */
     public void setTime(long time) {
         this.time = time;
         String[] split = sdf.format(new Date(time)).split(":");

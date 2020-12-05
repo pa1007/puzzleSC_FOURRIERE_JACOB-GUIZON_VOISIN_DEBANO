@@ -17,12 +17,20 @@ public class PuzzleConsole extends Puzzle {
         super(maxX, maxY);
     }
 
+    /**
+     * Init console puzzle and game
+     */
     @Override
     public void init() {
         initStringBlock(maxX, maxY);
         initGame(maxX, maxY);
     }
 
+    /**
+     * Initialise arraylist of string block
+     * @param x number of row
+     * @param y number of column
+     */
     public void initStringBlock(int x, int y) {
         blocks = new ArrayList<>();
         int pos = 1;
@@ -38,6 +46,11 @@ public class PuzzleConsole extends Puzzle {
         }
     }
 
+    /**
+     * Initialise game and void block
+     * @param x number of row
+     * @param y number of column
+     */
     public void initGame(int x, int y) {
         this.voidBlock = new BlockVoid(new Position(x - 1, y - 1));
         blocks.add(voidBlock);
@@ -51,6 +64,9 @@ public class PuzzleConsole extends Puzzle {
         }
     }
 
+    /**
+     * Start game, game will only be stopped when game has been solved.
+     */
     public void startGameLine() {
         Scanner sc = new Scanner(System.in);
         String  s;
@@ -92,6 +108,10 @@ public class PuzzleConsole extends Puzzle {
         }
     }
 
+    /**
+     * Parse game board into string
+     * @return String of the game board
+     */
     public String createString() {
         StringBuilder sb = new StringBuilder(getPremiereLigne());
         var ref = new Object() { // Object for final usage in lambda
@@ -127,6 +147,9 @@ public class PuzzleConsole extends Puzzle {
 
     }
 
+    /**
+     * @return Array of blocks who are around the void block.
+     */
     public List<Block> getAroundVoid() {
         List<Position> p = voidBlock.getCurrentPos().getSurrounding();
         return blocks.stream().filter(bCur -> p.stream().anyMatch((val) -> bCur.getCurrentPos().equals(val))).collect(
