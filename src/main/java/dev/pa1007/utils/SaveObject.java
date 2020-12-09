@@ -17,22 +17,42 @@ public class SaveObject implements Serializable {
 
     private String image;
 
+    /**
+     * Constructor of SaveObject with custom image path
+     * @param puzzle Puzzle object
+     * @param pathImage Image file path
+     * @throws IOException
+     */
     public SaveObject(Puzzle puzzle, File pathImage) throws IOException {
         this.puzzle = puzzle;
         saveImage(pathImage);
         graph = true;
     }
 
+    /**
+     * Constructor of SaveObject with puzzle
+     * @param puzzle Puzzle object
+     */
     public SaveObject(Puzzle puzzle) { this.puzzle = puzzle; }
 
+    /**
+     * @return puzzle value
+     */
     public Puzzle getPuzzle() {
         return puzzle;
     }
 
+    /**
+     * @return graph value
+     */
     public boolean getGraph() {
         return graph;
     }
 
+    /**
+     * @return Image object
+     * @throws IOException
+     */
     public Image getImage() throws IOException {
         byte[] decodedBytes = Base64.getDecoder().decode(image);
         File   file         = new File("savedImage.jpg");
@@ -40,6 +60,10 @@ public class SaveObject implements Serializable {
         return ImageIO.read(file);
     }
 
+    /**
+     * @param path Path where image is saved
+     * @throws IOException
+     */
     private void saveImage(File path) throws IOException {
         byte[] fileContent = FileUtils.readFileToByteArray(path);
         image = Base64.getEncoder().encodeToString(fileContent);

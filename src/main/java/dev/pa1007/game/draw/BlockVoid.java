@@ -11,6 +11,9 @@ public class BlockVoid extends Block {
 
     private transient BufferedImage image;
 
+    /**
+     * @param startPos position of the block
+     */
     public BlockVoid(Position startPos) {
         super(-1, startPos);
         this.setCurrentPos(startPos);
@@ -22,10 +25,17 @@ public class BlockVoid extends Block {
         }
     }
 
+    /**
+     * @return BufferedImage
+     */
     public BufferedImage getImage() {
         return image;
     }
 
+    /**
+     * setter of the image
+     * @param image BufferedImage
+     */
     public void setImage(BufferedImage image) {
         this.image = image;
     }

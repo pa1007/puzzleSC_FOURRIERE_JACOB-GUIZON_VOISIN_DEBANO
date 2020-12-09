@@ -105,23 +105,38 @@ public class StopwatchTimer extends TimerTask implements Serializable {
         Platform.runLater((() -> clock.setText(sspTime.getValue())));
     }
 
+    /**
+     * @param time set time value of the object to the value passed in param
+     */
     public void setTimel(long time) {
         this.time = time;
     }
 
+    /**
+     * @return string of the timer
+     */
     public SimpleStringProperty getSspTime() {
         return sspTime;
     }
 
+    /**
+     * @param clock set text of Text object with the time value
+     */
     public void setText(Text clock) {
         this.clock = clock;
         Platform.runLater((() -> clock.setText(sspTime.getValue())));
     }
 
+    /**
+     * @return true if the clock is stopped, false else.
+     */
     public boolean isStop() {
         return stop;
     }
 
+    /**
+     * @return stringed time value
+     */
     @Override
     public String toString() {
         return sspTime.getValue();
