@@ -78,5 +78,6 @@
             </Lighting>
          </effect>
       </Ellipse>
+      <Button layoutX="393.0" layoutY="14.0" mnemonicParsing="false" onAction="#leaderBoardAdd" prefHeight="25.0" prefWidth="193.0" text="Add to LeaderBoard" />
    </children>
 </Pane>

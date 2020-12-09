@@ -81,7 +81,7 @@ public class HomeController {
     }
 
     @FXML
-    public void menuNewGameHandler(ActionEvent event) {
+    public void newGameHandler(ActionEvent event) {
 
     }
 
@@ -103,7 +103,6 @@ public class HomeController {
         fc.setTitle("Choose image");
         File        image = fc.showOpenDialog(null);
         if (image.canRead()) {
-            System.out.println(image.getPath());
             imagePath = image.getPath();
             nomChemin.setText(imagePath);
         }

@@ -79,7 +79,7 @@ public class MainController {
         return gameG;
     }
 
-    public Text     getClock() {
+    public Text getClock() {
         return clock;
     }
 
@@ -87,17 +87,17 @@ public class MainController {
         return game;
     }
 
+    public void setGame(PuzzleGraphic game) {
+        this.game = game;
+        initGame();
+    }
+
     public void setGame2(PuzzleGraphic game) {
         this.game = game;
     }
 
-    public void     setCount(int i) {
+    public void setCount(int i) {
         count = i;
-    }
-
-    public void setGame(PuzzleGraphic game) {
-        this.game = game;
-        initGame();
     }
 
     public void stopTimer(ActionEvent actionEvent) {
@@ -126,6 +126,12 @@ public class MainController {
     }
 
     @FXML
+    public void quit(ActionEvent event) {
+        Platform.exit();
+        System.exit(0);
+    }
+
+    @FXML
     void onKeyPressed(KeyEvent event) throws IOException {
         switch (event.getCode()) {
             case DOWN -> this.game.move(1, 0);
@@ -141,10 +147,11 @@ public class MainController {
         }
         if (this.game.isSolved()) {
             this.game.stopTimer();
-            Stage                 stage  = new Stage();
-            FXMLLoader            loader = new FXMLLoader(Test.class.getResource("win.fxml"));
-            Parent                root   = loader.load();
-            WinController winController  = loader.getController();
+            Stage         stage         = new Stage();
+            FXMLLoader    loader        = new FXMLLoader(Test.class.getResource("win.fxml"));
+            Parent        root          = loader.load();
+            WinController winController = loader.getController();
+            winController.setInfos(game.getTimer().toString(), count);
             Scene scene = new Scene(root);
             stage.setTitle("You Won !");
             stage.setMinWidth(625);
@@ -200,12 +207,6 @@ public class MainController {
             a.show();
         }
 
-    }
-
-    @FXML
-    public void quit(ActionEvent event) {
-        Platform.exit();
-        System.exit(0);
     }
 
     @FXML

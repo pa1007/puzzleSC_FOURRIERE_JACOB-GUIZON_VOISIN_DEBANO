@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,7 +79,7 @@ public class LeaderBoardController {
     private List<Text> names;
 
 
-    public void init()  {
+    public void init() {
         try {
             refreshLB();
         }
@@ -117,7 +116,7 @@ public class LeaderBoardController {
         ConnectionSingleton instance   = ConnectionSingleton.getInstance();
         Connection          connection = instance.getConnection();
         ResultSet resultSet = connection.createStatement().executeQuery(
-                "SELECT * FROM LeaderBoard ORDER by score LIMIT 10 ");
+                "SELECT * FROM LeaderBoard ORDER by score DESC LIMIT 10 ");
         while (resultSet.next()) {
             names.get(i).setText(resultSet.getString("Name"));
             scores.get(i).setText(resultSet.getString("score"));

@@ -40,6 +40,7 @@ public class StopwatchTimer extends TimerTask implements Serializable {
 
     /**
      * Start the timer
+     *
      * @param time time value where the timer must start
      */
     public void startTimer(long time) {
@@ -66,6 +67,7 @@ public class StopwatchTimer extends TimerTask implements Serializable {
 
     /**
      * Stop the timer and assign new time value
+     *
      * @param time time value
      */
     public void stopTimer(long time) {
@@ -76,6 +78,7 @@ public class StopwatchTimer extends TimerTask implements Serializable {
 
     /**
      * Getter for time value
+     *
      * @return Time
      */
     public long getTime() {
@@ -84,6 +87,7 @@ public class StopwatchTimer extends TimerTask implements Serializable {
 
     /**
      * set time value
+     *
      * @param time time value
      */
     public void setTime(long time) {
@@ -116,5 +120,10 @@ public class StopwatchTimer extends TimerTask implements Serializable {
 
     public boolean isStop() {
         return stop;
+    }
+
+    @Override
+    public String toString() {
+        return sspTime.getValue();
     }
 }
