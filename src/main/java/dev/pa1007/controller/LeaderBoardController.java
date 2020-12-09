@@ -116,7 +116,7 @@ public class LeaderBoardController {
         ConnectionSingleton instance   = ConnectionSingleton.getInstance();
         Connection          connection = instance.getConnection();
         ResultSet resultSet = connection.createStatement().executeQuery(
-                "SELECT * FROM LeaderBoard ORDER by score DESC LIMIT 10 ");
+                "SELECT * FROM LeaderBoard ORDER by score ASC LIMIT 10 ");
         while (resultSet.next()) {
             names.get(i).setText(resultSet.getString("Name"));
             scores.get(i).setText(resultSet.getString("score"));
