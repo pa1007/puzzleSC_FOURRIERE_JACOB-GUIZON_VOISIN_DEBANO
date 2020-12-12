@@ -20,6 +20,11 @@ public class Position implements Serializable {
         this.y = y;
     }
 
+    @Override
+    public Position clone() {
+        return new Position(this.x, this.y);
+    }
+
     /**
      * @return The x coordinate.
      */
@@ -54,6 +59,7 @@ public class Position implements Serializable {
 
     /**
      * Compare position with Position passed in param
+     *
      * @param o2 Position
      * @return Boolean true if Position in param is superior, else false
      */
@@ -63,6 +69,7 @@ public class Position implements Serializable {
 
     /**
      * Create new Position with coordinate +- x and y
+     *
      * @param x row
      * @param y column
      * @return new Position
@@ -76,6 +83,30 @@ public class Position implements Serializable {
      */
     public List<Position> getSurrounding() {
         return List.of(getNear(-1, 0), getNear(0, 1), getNear(0, -1), getNear(1, 0));
+    }
+
+    /**
+     * @param test
+     * @return 1 is on top,2 is on the right,3 is besides 4 is on the left, 0 are the same,5 anything
+     */
+    public int getWhere(Position test) {
+        if (y == test.y) {
+            if (x + 1 == test.x) {
+                return 3;
+            }
+            else if (x - 1 == test.x) {
+                return 1;
+            }
+        }
+        if (x == test.x) {
+            if (y + 1 == test.y) {
+                return 2;
+            }
+            else if (y - 1 == test.y) {
+                return 4;
+            }
+        }
+        return 5;
     }
 
     @Override
@@ -102,10 +133,5 @@ public class Position implements Serializable {
                "x=" + x +
                ", y=" + y +
                '}';
-    }
-
-    @Override
-    public Position clone() {
-        return new Position(this.x, this.y);
     }
 }

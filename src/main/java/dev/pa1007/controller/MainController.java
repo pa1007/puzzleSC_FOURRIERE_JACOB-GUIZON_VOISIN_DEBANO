@@ -2,6 +2,8 @@ package dev.pa1007.controller;
 
 import dev.pa1007.MainApp;
 import dev.pa1007.Test;
+import dev.pa1007.ai.AI;
+import dev.pa1007.ai.AIRandom;
 import dev.pa1007.game.Puzzle;
 import dev.pa1007.game.PuzzleGraphic;
 import dev.pa1007.utils.LoadSaveException;
@@ -30,6 +32,7 @@ public class MainController {
 
     private PuzzleGraphic game;
     private int           count;
+    private AI            ai;
 
     @FXML
     private MenuItem startAIItem;
@@ -104,22 +107,25 @@ public class MainController {
         game.stopTimer();
     }
 
-
+    @FXML
     public void moveUP(ActionEvent actionEvent) {
         this.game.move(-1, 0);
         updateClock();
     }
 
+    @FXML
     public void moveDOWN(ActionEvent actionEvent) {
         this.game.move(1, 0);
         updateClock();
     }
 
+    @FXML
     public void moveLEFT(ActionEvent actionEvent) {
         this.game.move(0, -1);
         updateClock();
     }
 
+    @FXML
     public void moveRIGHT(ActionEvent actionEvent) {
         this.game.move(0, 1);
         updateClock();
@@ -145,23 +151,7 @@ public class MainController {
             || event.getCode() == KeyCode.RIGHT) {
             updateClock();
         }
-        if (this.game.isSolved()) {
-            this.game.stopTimer();
-            Stage         stage         = new Stage();
-            FXMLLoader    loader        = new FXMLLoader(Test.class.getResource("win.fxml"));
-            Parent        root          = loader.load();
-            WinController winController = loader.getController();
-            winController.setInfos(game.getTimer().toString(), count);
-            Scene scene = new Scene(root);
-            stage.setTitle("You Won !");
-            stage.setMinWidth(625);
-            scene.getStylesheets().add(MainApp.class.getResource("dark-theme.css").toExternalForm());
-            stage.getIcons().add(new Image(MainApp.class.getResource("images/taquin.png").toExternalForm()));
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.show();
-            root.requestFocus();
-        }
+        testVictory();
     }
 
     //Menu handler start
@@ -221,12 +211,36 @@ public class MainController {
 
     @FXML
     void nextMoveAIHandler(ActionEvent event) {
+        if (ai == null) {
+            ai = new AIRandom();
+        }
+        int i = ai.faireChoix(game);
+        System.out.println(game);
+        System.out.println(i);
+        switch (i) {
+            case 1: // Up
+                moveUP(event);
+                break;
+            case 2: //right
+                moveRIGHT(event);
+                break;
+            case 3: //down
+                moveDOWN(event);
+                break;
+            case 4: //left
+                moveLEFT(event);
+                break;
+            case 5:
+            case 0:
+                break;
+        }
+
 
     }
 
     @FXML
     void changeAIHandler(ActionEvent event) {
-
+        ai = new AIRandom();
     }
 
     @FXML
@@ -270,7 +284,6 @@ public class MainController {
         alertHtp.setResizable(true);
         alertHtp.showAndWait();
     }
-    //Menu handler stop
 
     @FXML
     void aboutHandler(ActionEvent event) {
@@ -286,6 +299,27 @@ public class MainController {
                                        "Produit dans le cadre du cours Ingenierie logiciel de L3 MIASHS SC");
         alertAbout.setContentText(content);
         alertAbout.showAndWait();
+    }
+    //Menu handler stop
+
+    private void testVictory() throws IOException {
+        if (this.game.isSolved()) {
+            this.game.stopTimer();
+            Stage         stage         = new Stage();
+            FXMLLoader    loader        = new FXMLLoader(Test.class.getResource("win.fxml"));
+            Parent        root          = loader.load();
+            WinController winController = loader.getController();
+            winController.setInfos(game.getTimer().toString(), count);
+            Scene scene = new Scene(root);
+            stage.setTitle("You Won !");
+            stage.setMinWidth(625);
+            scene.getStylesheets().add(MainApp.class.getResource("dark-theme.css").toExternalForm());
+            stage.getIcons().add(new Image(MainApp.class.getResource("images/taquin.png").toExternalForm()));
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+            root.requestFocus();
+        }
     }
 
     private void updateClock() {

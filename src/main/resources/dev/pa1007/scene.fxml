@@ -69,14 +69,14 @@
                     </MenuItem>
                     <SeparatorMenuItem/>
                     <Menu text="AI">
-                        <MenuItem fx:id="startAIItem" disable="true" mnemonicParsing="false" onAction="#startAIHandler"
+                        <MenuItem fx:id="startAIItem" mnemonicParsing="false" onAction="#startAIHandler"
                                   text="Start">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="A" control="UP" meta="UP" shift="DOWN"
                                                     shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="stopAIItem" disable="true" mnemonicParsing="false" onAction="#stopAIHandler"
+                        <MenuItem fx:id="stopAIItem" mnemonicParsing="false" onAction="#stopAIHandler"
                                   text="Stop">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="I" control="UP" meta="UP" shift="DOWN"
@@ -84,7 +84,7 @@
                             </accelerator>
                         </MenuItem>
                         <SeparatorMenuItem/>
-                        <MenuItem disable="true" mnemonicParsing="false" onAction="#nextMoveAIHandler"
+                        <MenuItem mnemonicParsing="false" onAction="#nextMoveAIHandler"
                                   text="Predict next move">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="M" control="UP" meta="UP" shift="DOWN"
@@ -92,7 +92,7 @@
                             </accelerator>
                         </MenuItem>
                         <SeparatorMenuItem/>
-                        <MenuItem disable="true" mnemonicParsing="false" onAction="#changeAIHandler"
+                        <MenuItem mnemonicParsing="false" onAction="#changeAIHandler"
                                   text="Change AI algorithm"/>
                     </Menu>
                     <MenuItem fx:id="menuQuit" mnemonicParsing="false" onAction="#quit" text="Quit">
