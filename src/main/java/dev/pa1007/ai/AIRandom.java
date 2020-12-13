@@ -16,10 +16,7 @@ public class AIRandom implements AI {
                 position,
                 pz
         )).collect(Collectors.toList());
-        System.out.println(collect);
-        System.out.println(currentPos);
         Position move = collect.get(AIUtils.randBetween(0, collect.size()));
-        System.out.println(move);
         return AIUtils.calculateResult(currentPos, move);
     }
 

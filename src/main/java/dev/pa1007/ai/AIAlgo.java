@@ -17,18 +17,25 @@ public class AIAlgo implements AI {
         Position currentPos = pz.getVoidBlock().getCurrentPos();
         Position nextMove;
         if (auto) {
-            if (!moves.isEmpty()) {
+            if (moves != null && !moves.isEmpty()) {
                 Puzzle nxtMove = moves.removeFirst();
                 nextMove = nxtMove.getVoidBlock().getCurrentPos();
                 return AIUtils.calculateResult(currentPos, nextMove);
             }
         }
         moves = dijkstraSolve(pz);
-        //Not working;
-
-        Puzzle nxtMove = moves.removeFirst();
+        if (moves.isEmpty()) {
+            return 6;
+        }
+        Puzzle nxtMove = moves.removeFirst(); // Remove actual state
+        nxtMove = moves.removeFirst();
+        System.out.println(nxtMove.toString());
         nextMove = nxtMove.getVoidBlock().getCurrentPos();
+        System.out.println(currentPos);
+        System.out.println(nextMove);
+        System.out.println(AIUtils.manhattanDistance(currentPos, nextMove));
         int i = AIUtils.calculateResult(currentPos, nextMove);
+        System.out.println(i);
         return i;
 
     }

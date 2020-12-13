@@ -15,10 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -63,6 +60,7 @@ public class MainController {
     private MenuItem      yellowTheme;
     @FXML
     private MenuItem      newGameMain;
+    private int           lastResult;
 
     public MenuItem getWhiteTheme() {
         return whiteTheme;
@@ -207,20 +205,46 @@ public class MainController {
 
     @FXML
     void startAIHandler(ActionEvent event) {
+        stopAi = false;
         stopAIItem.setDisable(false);
         ai.setAuto(true);
-        new Thread(() -> {
-            while (!stopAi) {
-                nextMoveAIHandler(event);
-                try {
-                    Thread.sleep(100);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                    break;
-                }
+        if (ai instanceof AIAlgo) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Temps de calcule");
+            alert.setHeaderText("Le temps de calcule pour cette algorithme est long,");
+            alert.setContentText(" cela peut prendre plusieurs minutes, voulez vous continuez ?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                new Thread(() -> {
+                    while (!stopAi && lastResult != 6) {
+                        nextMoveAIHandler(event);
+                        try {
+                            Thread.sleep(100);
+                        }
+                        catch (InterruptedException e) {
+                            e.printStackTrace();
+                            break;
+                        }
+                    }
+                }).start();
             }
-        }).start();
+        }
+        else {
+            new Thread(() -> {
+                while (!stopAi) {
+                    nextMoveAIHandler(event);
+                    try {
+                        Thread.sleep(100);
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                        break;
+                    }
+                }
+            }).start();
+        }
+
 
     }
 
@@ -232,8 +256,16 @@ public class MainController {
 
     @FXML
     void nextMoveAIHandler(ActionEvent event) {
-        int i = ai.faireChoix(game);
-        switch (i) {
+        Platform.runLater(() -> {
+            try {
+                testVictory();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        lastResult = ai.faireChoix(game);
+        switch (lastResult) {
             case 1: // Up
                 Platform.runLater(() -> moveUP(event));
                 break;
@@ -245,6 +277,15 @@ public class MainController {
                 break;
             case 4: //left
                 Platform.runLater(() -> moveLEFT(event));
+                break;
+            case 6:
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Impossible");
+                    alert.setHeaderText("L'algorithme pense que :");
+                    alert.setContentText("Ce plateau de jeu n'est pas possible a etre resolut");
+                    alert.show();
+                });
                 break;
             case 5:
             case 0:
@@ -330,6 +371,7 @@ public class MainController {
 
     private void testVictory() throws IOException {
         if (this.game.isSolved()) {
+            stopAi = true;
             this.game.stopTimer();
             Stage         stage         = new Stage();
             FXMLLoader    loader        = new FXMLLoader(Test.class.getResource("win.fxml"));
