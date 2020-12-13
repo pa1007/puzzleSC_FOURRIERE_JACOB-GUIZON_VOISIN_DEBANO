@@ -5,6 +5,8 @@ import dev.pa1007.game.draw.StopwatchTimer;
 import javafx.scene.text.Text;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
+import java.util.StringJoiner;
 
 public abstract class Puzzle implements Serializable {
 
@@ -112,6 +114,7 @@ public abstract class Puzzle implements Serializable {
 
     /**
      * Check if puzzle has been solved.
+     *
      * @return True if the puzzle has been solved and false otherwise.
      */
     public boolean isSolved() {
@@ -122,6 +125,7 @@ public abstract class Puzzle implements Serializable {
 
     /**
      * Switch between void block and block at position passed in param
+     *
      * @param x row
      * @param y column
      */
@@ -132,5 +136,36 @@ public abstract class Puzzle implements Serializable {
             b.setCurrentPos(voidBlock.getCurrentPos().clone());
             voidBlock.setCurrentPos(p);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Puzzle puzzle = (Puzzle) o;
+        return maxX == puzzle.maxX
+               && maxY == puzzle.maxY
+               && Objects.equals(blocks, puzzle.blocks)
+               && Objects.equals(voidBlock, puzzle.voidBlock);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(blocks, maxX, maxY, voidBlock, timer);
+    }
+
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Puzzle.class.getSimpleName() + "[", "]")
+                .add("blocks=" + blocks)
+                .add("maxX=" + maxX)
+                .add("maxY=" + maxY)
+                .add("voidBlock=" + voidBlock)
+                .toString();
     }
 }

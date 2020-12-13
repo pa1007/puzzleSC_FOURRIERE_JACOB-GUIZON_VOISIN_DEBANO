@@ -3,6 +3,7 @@ package dev.pa1007.controller;
 import dev.pa1007.MainApp;
 import dev.pa1007.Test;
 import dev.pa1007.ai.AI;
+import dev.pa1007.ai.AIAlgo;
 import dev.pa1007.ai.AIRandom;
 import dev.pa1007.game.Puzzle;
 import dev.pa1007.game.PuzzleGraphic;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -27,36 +29,40 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 public class MainController {
 
+
+    @FXML
+    public  MenuItem      nextMoveAIItem;
     private PuzzleGraphic game;
     private int           count;
-    private AI            ai;
-
+    private boolean       stopAi;
+    private AI            ai = new AIRandom();
     @FXML
-    private MenuItem startAIItem;
+    private MenuItem      startAIItem;
     @FXML
-    private MenuItem stopAIItem;
+    private MenuItem      stopAIItem;
     @FXML
-    private GridPane mainG;
+    private GridPane      mainG;
     @FXML
-    private Text     clock;
+    private Text          clock;
     @FXML
-    private GridPane gameG;
+    private GridPane      gameG;
     @FXML
-    private Label    shiftingLabel;
+    private Label         shiftingLabel;
     @FXML
-    private MenuItem whiteTheme;
+    private MenuItem      whiteTheme;
     @FXML
-    private MenuItem darkTheme;
+    private MenuItem      darkTheme;
     @FXML
-    private MenuItem blueTheme;
+    private MenuItem      blueTheme;
     @FXML
-    private MenuItem yellowTheme;
+    private MenuItem      yellowTheme;
     @FXML
-    private MenuItem newGameMain;
-
+    private MenuItem      newGameMain;
 
     public MenuItem getWhiteTheme() {
         return whiteTheme;
@@ -201,46 +207,66 @@ public class MainController {
 
     @FXML
     void startAIHandler(ActionEvent event) {
+        stopAIItem.setDisable(false);
+        ai.setAuto(true);
+        new Thread(() -> {
+            while (!stopAi) {
+                nextMoveAIHandler(event);
+                try {
+                    Thread.sleep(100);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        }).start();
 
     }
 
     @FXML
     void stopAIHandler(ActionEvent event) {
-
+        stopAi = true;
+        stopAIItem.setDisable(true);
     }
 
     @FXML
     void nextMoveAIHandler(ActionEvent event) {
-        if (ai == null) {
-            ai = new AIRandom();
-        }
         int i = ai.faireChoix(game);
-        System.out.println(game);
-        System.out.println(i);
         switch (i) {
             case 1: // Up
-                moveUP(event);
+                Platform.runLater(() -> moveUP(event));
                 break;
             case 2: //right
-                moveRIGHT(event);
+                Platform.runLater(() -> moveRIGHT(event));
                 break;
             case 3: //down
-                moveDOWN(event);
+                Platform.runLater(() -> moveDOWN(event));
                 break;
             case 4: //left
-                moveLEFT(event);
+                Platform.runLater(() -> moveLEFT(event));
                 break;
             case 5:
             case 0:
                 break;
         }
 
-
     }
 
     @FXML
     void changeAIHandler(ActionEvent event) {
-        ai = new AIRandom();
+        ChoiceDialog<String> cd       = new ChoiceDialog<>("Random", List.of("Random", "Algorithm de Dijkstra"));
+        Optional<String>     optional = cd.showAndWait();
+        if (optional.isPresent()) {
+            switch (optional.get()) {
+                case "Random" -> ai = new AIRandom();
+                case "Algorithm de Dijkstra" -> ai = new AIAlgo();
+            }
+            startAIItem.setDisable(false);
+            nextMoveAIItem.setDisable(false);
+
+        }
+
     }
 
     @FXML

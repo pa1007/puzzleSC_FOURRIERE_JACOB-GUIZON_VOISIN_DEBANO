@@ -1,6 +1,7 @@
 package dev.pa1007.game;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public abstract class Block implements Serializable {
 
@@ -83,15 +84,34 @@ public abstract class Block implements Serializable {
         this.number = number;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Block block = (Block) o;
+        return number == block.number && Objects.equals(currentPos, block.currentPos) && Objects.equals(
+                startPos,
+                block.startPos
+        );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, currentPos, startPos);
+    }
+
     /**
      * @return The block stringed
      */
     @Override
     public String toString() {
-        return "Block{" +
-                "number=" + number +
-                ", currentPos=" + currentPos +
-                ", startPos=" + startPos +
-                '}';
+        return "Block" + number +
+               "{ currentPos=" + currentPos +
+               ", startPos=" + startPos +
+               '}';
     }
 }

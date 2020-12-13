@@ -24,10 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class PuzzleGraphic extends Puzzle {
@@ -40,18 +37,23 @@ public class PuzzleGraphic extends Puzzle {
 
     /**
      * Create graphical puzzle with default image
+     *
      * @param maxX number of row
      * @param maxY number of column
      */
     public PuzzleGraphic(int maxX, int maxY) {
         super(maxX, maxY);
-        this.imagePath = URLDecoder.decode(MainApp.class.getResource("images/taquin.png").getPath(), StandardCharsets.UTF_8);
+        this.imagePath = URLDecoder.decode(
+                MainApp.class.getResource("images/taquin.png").getPath(),
+                StandardCharsets.UTF_8
+        );
     }
 
     /**
      * Create graphical puzzle with custom image
-     * @param maxX number of row
-     * @param maxY number of column
+     *
+     * @param maxX      number of row
+     * @param maxY      number of column
      * @param imagePath path of the image
      */
     public PuzzleGraphic(int maxX, int maxY, String imagePath) {
@@ -76,6 +78,7 @@ public class PuzzleGraphic extends Puzzle {
 
     /**
      * Initialise the graphical block array
+     *
      * @param path Path of the image
      */
     public void initGraphicBlock(String path) throws IOException {
@@ -90,7 +93,7 @@ public class PuzzleGraphic extends Puzzle {
         int h   = read.getHeight() / maxX - 1;
         int w   = read.getWidth() / maxY - 1;
         int nb  = 1;
-        int max = (maxX * maxY) ;
+        int max = (maxX * maxY);
         for (int j = 0; j < WIDTH && nb != max; j += w) {
             for (int i = 0; i < HEIGHT; i += h) {
                 int dh = h;
@@ -111,6 +114,7 @@ public class PuzzleGraphic extends Puzzle {
 
     /**
      * Update the UI
+     *
      * @param gameG GridPane bind to the game
      * @param clock Clock timer bind to the game
      */
@@ -185,7 +189,6 @@ public class PuzzleGraphic extends Puzzle {
     }
 
     /**
-     *
      * @param numberOnly set the boolean to make the game number only
      */
     public void setNumberOnly(boolean numberOnly) {
@@ -217,6 +220,7 @@ public class PuzzleGraphic extends Puzzle {
 
     /**
      * Set the graphical element with the image in param
+     *
      * @param image image object
      */
     public void loadImage(Image image) {
@@ -269,6 +273,29 @@ public class PuzzleGraphic extends Puzzle {
                 tot++;
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        PuzzleGraphic that = (PuzzleGraphic) o;
+        return numberOnly == that.numberOnly && Objects.equals(image, that.image) && Objects.equals(
+                imagePath,
+                that.imagePath
+        );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), numberOnly, image, imagePath);
     }
 
     /**

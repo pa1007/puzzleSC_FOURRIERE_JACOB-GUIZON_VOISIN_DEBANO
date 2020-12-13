@@ -25,6 +25,12 @@ public class BlockVoid extends Block {
         }
     }
 
+    public BlockVoid(BlockVoid voidBlock) {
+        super(-1,voidBlock.getStartPos().clone());
+        this.setCurrentPos(voidBlock.getCurrentPos().clone());
+        image = voidBlock.image;
+    }
+
     /**
      * @return BufferedImage
      */
@@ -34,6 +40,7 @@ public class BlockVoid extends Block {
 
     /**
      * setter of the image
+     *
      * @param image BufferedImage
      */
     public void setImage(BufferedImage image) {

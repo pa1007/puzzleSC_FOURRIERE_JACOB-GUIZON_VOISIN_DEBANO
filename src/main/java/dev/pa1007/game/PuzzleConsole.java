@@ -4,7 +4,6 @@ import dev.pa1007.game.draw.BlockString;
 import dev.pa1007.game.draw.BlockVoid;
 import dev.pa1007.utils.LoadSaveException;
 import dev.pa1007.utils.Save;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +12,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class PuzzleConsole extends Puzzle {
+
     public PuzzleConsole(int maxX, int maxY) {
         super(maxX, maxY);
     }
@@ -28,13 +28,14 @@ public class PuzzleConsole extends Puzzle {
 
     /**
      * Initialise arraylist of string block
+     *
      * @param x number of row
      * @param y number of column
      */
     public void initStringBlock(int x, int y) {
         blocks = new ArrayList<>();
         int pos = 1;
-        int max = x * y ;
+        int max = x * y;
         for (int i = 0; i < y; i++) {
             for (int j = 0; j < x; j++) {
                 blocks.add(new BlockString(pos, new Position(i, j)));
@@ -48,6 +49,7 @@ public class PuzzleConsole extends Puzzle {
 
     /**
      * Initialise game and void block
+     *
      * @param x number of row
      * @param y number of column
      */
@@ -74,7 +76,14 @@ public class PuzzleConsole extends Puzzle {
             System.out.println(this.createString());
             System.out.println("[z] ↑ | [q] <- | [s] ↓ | [d] → | [f] sauvegarder | [c] charger");
             s = sc.nextLine();
-            while (!(s.equals("q") || s.equals("d") || s.equals("z") || s.equals("s") || s.equals("f") || s.equals("c"))) {
+            while (!(
+                    s.equals("q")
+                    || s.equals("d")
+                    || s.equals("z")
+                    || s.equals("s")
+                    || s.equals("f")
+                    || s.equals("c")
+            )) {
                 System.out.println("Entrez une valeur correcte");
                 s = sc.nextLine();
             }
@@ -87,19 +96,19 @@ public class PuzzleConsole extends Puzzle {
                     try {
                         Save.save(this);
                     }
-                    catch(IOException e){
+                    catch (IOException e) {
                         System.out.println("Echec de la sauvegarde.");
                     }
                 }
                 case "c" -> {
                     try {
-                        Puzzle load = Save.load();
-                        PuzzleConsole t = (PuzzleConsole) load;
+                        Puzzle        load = Save.load();
+                        PuzzleConsole t    = (PuzzleConsole) load;
                         this.blocks = t.blocks;
                         this.voidBlock = t.voidBlock;
                         this.timer = t.timer;
                     }
-                    catch(IOException | LoadSaveException e) {
+                    catch (IOException | LoadSaveException e) {
                         System.out.println("Echec du chargement");
                     }
 
@@ -110,6 +119,7 @@ public class PuzzleConsole extends Puzzle {
 
     /**
      * Parse game board into string
+     *
      * @return String of the game board
      */
     public String createString() {

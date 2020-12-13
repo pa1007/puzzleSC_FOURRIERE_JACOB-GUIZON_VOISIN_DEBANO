@@ -10,20 +10,21 @@ public class AIRandom implements AI {
 
     @Override
     public int faireChoix(Puzzle pz) {
-        BlockVoid voi = pz.getVoidBlock();
-
-        Position currentPos = voi.getCurrentPos();
+        BlockVoid voi        = pz.getVoidBlock();
+        Position  currentPos = voi.getCurrentPos();
         List<Position> collect = currentPos.getSurrounding().stream().filter(position -> AIUtils.inRange(
                 position,
                 pz
         )).collect(Collectors.toList());
-
         System.out.println(collect);
-
-        int index = AIUtils.randBetween(0, collect.size() );
-        System.out.println(index);
-        Position move = collect.get(index);
-
+        System.out.println(currentPos);
+        Position move = collect.get(AIUtils.randBetween(0, collect.size()));
+        System.out.println(move);
         return AIUtils.calculateResult(currentPos, move);
+    }
+
+    @Override
+    public void setAuto(boolean auto) {
+        //not used
     }
 }
