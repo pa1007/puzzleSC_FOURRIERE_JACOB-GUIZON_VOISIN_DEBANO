@@ -86,7 +86,7 @@ public class Position implements Serializable {
     }
 
     /**
-     * @param test
+     * @param test the position to test with
      * @return 1 is on top,2 is on the right,3 is besides 4 is on the left, 0 are the same,5 anything
      */
     public int getWhere(Position test) {

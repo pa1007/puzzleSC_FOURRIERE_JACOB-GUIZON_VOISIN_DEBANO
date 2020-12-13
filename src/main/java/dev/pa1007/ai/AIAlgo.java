@@ -9,9 +9,25 @@ import java.util.stream.Collectors;
 
 public class AIAlgo implements AI {
 
-    private boolean            auto;
+    /**
+     * Set the cache system if this was to be reused for for not recalculating anythings
+     */
+    private boolean auto;
+
+
+    /**
+     * Caches the moves for victory
+     */
     private LinkedList<Puzzle> moves;
 
+    /**
+     * This method is used for making the move
+     *
+     * @param pz the puzzle
+     * @return 1 is on top,2 is on the right,3 is besides 4 is on the left, 0 are the same,5 anything,6 if not possible
+     * @see AIUtils#calculateResult(Position, Position)
+     * @see #dijkstraSolve(Puzzle)
+     */
     @Override
     public int faireChoix(Puzzle pz) {
         Position currentPos = pz.getVoidBlock().getCurrentPos();
@@ -44,6 +60,12 @@ public class AIAlgo implements AI {
         this.auto = auto;
     }
 
+    /**
+     * This is the dijkstra algorithms for the game,it works but take a lot of times, need rework and multithreading for working better
+     *
+     * @param puzzle the start puzzle
+     * @return a list of moves done
+     */
     public LinkedList<Puzzle> dijkstraSolve(Puzzle puzzle) {
         int        nbBlock = puzzle.getBlocks().size();
         BigInteger nbMove  = AIUtils.factorial(nbBlock + 1).divide(BigInteger.TWO);
@@ -87,6 +109,12 @@ public class AIAlgo implements AI {
         return new LinkedList<>();
     }
 
+    /**
+     * Create and return all the possible worlds with all possible position of the void blocks
+     *
+     * @param p the puzzle to start with
+     * @return all the possible place the void block can move
+     */
     private List<Puzzle> calculatePuzzlesPossible(Puzzle p) {
         Position       currentPos  = p.getVoidBlock().getCurrentPos();
         List<Position> surrounding = currentPos.getSurrounding();

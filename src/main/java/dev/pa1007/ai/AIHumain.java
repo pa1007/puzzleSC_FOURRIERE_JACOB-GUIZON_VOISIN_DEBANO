@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Vague try at a custom algorithm, stopped to focus on dijkstra
+ */
 public class AIHumain implements AI {
 
     @Override
@@ -64,9 +67,6 @@ public class AIHumain implements AI {
             for (Block block : puzzle.getBlocks()) {
                 if (block.getNumber() == nbToMove) {
                     if (blocks.indexOf(block) < nbCurr) {
-                        System.out.println("ok");
-                        System.out.println(voidPos);
-                        System.out.println(puzzle.getVoidBlock().getCurrentPos());
                         return AIUtils.calculateResult(voidPos, puzzle.getVoidBlock().getCurrentPos());
                     }
                 }

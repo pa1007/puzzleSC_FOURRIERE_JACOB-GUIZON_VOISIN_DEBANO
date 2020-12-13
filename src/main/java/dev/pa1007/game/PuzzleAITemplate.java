@@ -5,6 +5,9 @@ import dev.pa1007.game.draw.BlockVoid;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 
+/**
+ * Template for AI, create a puzzle to test on
+ */
 public class PuzzleAITemplate extends Puzzle {
 
 
@@ -27,6 +30,12 @@ public class PuzzleAITemplate extends Puzzle {
                 .toString();
     }
 
+    /**
+     * Create a template puzzle from a existing one,create a new block and position for each one to not have problem with references
+     *
+     * @param puzzle the start puzzle
+     * @return the copy carbon
+     */
     public static PuzzleAITemplate createFromPz(Puzzle puzzle) {
         PuzzleAITemplate puzzleAITemplate = new PuzzleAITemplate(puzzle.maxX, puzzle.maxY);
         puzzleAITemplate.blocks = new ArrayList<>();
