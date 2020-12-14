@@ -17,11 +17,9 @@ import java.io.IOException;
 public class HomeController {
 
     private   String        imagePath;
-    private   PuzzleConsole gameWithoutGUI;
+
     @FXML
     private   TextField     gridSize;
-    @FXML
-    private   RadioButton   radioButtonConsole;
     @FXML
     private   RadioButton   radioButtonNumber;
     @FXML
@@ -46,10 +44,6 @@ public class HomeController {
 
     public String getGridSize() {
         return gridSize.getText();
-    }
-
-    public boolean getRadioButtonConsole() {
-        return radioButtonConsole.isSelected();
     }
 
     public boolean getRadioButtonNumber() {
@@ -129,9 +123,8 @@ public class HomeController {
     }
 
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
         ToggleGroup gui   = new ToggleGroup();
-        radioButtonConsole.setToggleGroup(gui);
         radioButtonNumber.setToggleGroup(gui);
         radioButtonPicture.setToggleGroup(gui);
         radioButtonPicture.setSelected(true);

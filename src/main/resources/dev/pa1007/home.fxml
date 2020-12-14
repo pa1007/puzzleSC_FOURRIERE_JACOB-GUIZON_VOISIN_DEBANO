@@ -73,9 +73,8 @@
                 <Image url="@images/taquin.png"/>
             </image>
         </ImageView>
-        <RadioButton fx:id="radioButtonConsole" layoutX="43.0" layoutY="165.0" mnemonicParsing="false" text="Play with the console" />
-        <RadioButton fx:id="radioButtonPicture" layoutX="43.0" layoutY="200.0" mnemonicParsing="false" text="Play with a picture" />
-        <RadioButton fx:id="radioButtonNumber" layoutX="43.0" layoutY="235.0" mnemonicParsing="false" text="Play with number only" />
+        <RadioButton fx:id="radioButtonPicture" layoutX="40.0" layoutY="165.0" mnemonicParsing="false" text="Play with a picture" />
+        <RadioButton fx:id="radioButtonNumber" layoutX="40.0" layoutY="200.0" mnemonicParsing="false" text="Play with number only" />
       <Label fx:id="nomChemin" layoutX="43.0" layoutY="148.0" prefHeight="17.0" prefWidth="483.0" />
     </children>
 </AnchorPane>

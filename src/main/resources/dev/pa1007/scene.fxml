@@ -65,8 +65,6 @@
                             <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                         </accelerator>
                     </MenuItem>
-                    <MenuItem mnemonicParsing="false" onAction="#nButtonHandler" text="Navigation Buttons">
-                    </MenuItem>
                     <SeparatorMenuItem/>
                     <Menu text="AI">
                         <MenuItem fx:id="startAIItem" disable="true" mnemonicParsing="false" onAction="#startAIHandler"

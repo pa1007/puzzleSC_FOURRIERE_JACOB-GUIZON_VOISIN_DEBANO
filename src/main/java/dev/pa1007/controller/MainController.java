@@ -1,7 +1,6 @@
 package dev.pa1007.controller;
 
 import dev.pa1007.MainApp;
-import dev.pa1007.Test;
 import dev.pa1007.ai.AI;
 import dev.pa1007.ai.AIAlgo;
 import dev.pa1007.ai.AIRandom;
@@ -374,12 +373,12 @@ public class MainController {
             stopAi = true;
             this.game.stopTimer();
             Stage         stage         = new Stage();
-            FXMLLoader    loader        = new FXMLLoader(Test.class.getResource("win.fxml"));
+            FXMLLoader    loader        = new FXMLLoader(MainApp.class.getResource("win.fxml"));
             Parent        root          = loader.load();
             WinController winController = loader.getController();
             winController.setInfos(game.getTimer().toString(), count);
             Scene scene = new Scene(root);
-            stage.setTitle("You Won !");
+            stage.setTitle("You Win !");
             stage.setMinWidth(625);
             scene.getStylesheets().add(MainApp.class.getResource("dark-theme.css").toExternalForm());
             stage.getIcons().add(new Image(MainApp.class.getResource("images/taquin.png").toExternalForm()));
@@ -413,7 +412,7 @@ public class MainController {
 
     public static void createLeaderBoard() throws IOException {
         Stage                 stage  = new Stage();
-        FXMLLoader            loader = new FXMLLoader(Test.class.getResource("leaderboard.fxml"));
+        FXMLLoader            loader = new FXMLLoader(MainApp.class.getResource("leaderboard.fxml"));
         Parent                root   = loader.load();
         LeaderBoardController lbc    = loader.getController();
         lbc.init();

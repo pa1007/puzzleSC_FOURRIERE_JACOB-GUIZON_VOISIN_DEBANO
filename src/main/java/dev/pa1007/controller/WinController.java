@@ -47,7 +47,7 @@ public class WinController {
         else {
             TextInputDialog dialog = new TextInputDialog("Player");
             dialog.setTitle("Entrez votre nom");
-            dialog.setHeaderText("Entrez votre nom pour ajoutez au leaderboard");
+            dialog.setHeaderText("Entrez votre nom pour ajouter au leaderboard");
             dialog.setContentText("Entrez votre nom ici :");
             Optional<String> result = dialog.showAndWait();
             result.ifPresent(s -> {
@@ -60,7 +60,7 @@ public class WinController {
                     preparedStatement.setString(3, time);
                     preparedStatement.execute();
                     Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-                    a.setContentText("Bien mis dans le leaderboard");
+                    a.setContentText("Vous avez ete ajoute au classement");
                     a.show();
                     done = true;
                 }
@@ -71,7 +71,5 @@ public class WinController {
                 }
             });
         }
-
-
     }
 }

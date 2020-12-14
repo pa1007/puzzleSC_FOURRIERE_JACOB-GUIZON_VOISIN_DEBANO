@@ -2,7 +2,6 @@ package dev.pa1007;
 
 import dev.pa1007.controller.HomeController;
 import dev.pa1007.controller.MainController;
-import dev.pa1007.game.PuzzleConsole;
 import dev.pa1007.game.PuzzleGraphic;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -27,8 +26,6 @@ public class MainApp extends Application {
         MainController mainController = loaderGame.getController();
         HomeController homecontroller = loaderHome.getController();
         stage.setTitle("Taquin");
-        /*stage.setMinWidth(625);
-        stage.setMinHeight(775);*/
         stage.setWidth(625);
         stage.setHeight(755);
         stage.setOnCloseRequest(event -> {
@@ -50,16 +47,10 @@ public class MainApp extends Application {
         newGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                boolean console = homecontroller.getRadioButtonConsole();
                 boolean number = homecontroller.getRadioButtonNumber();
                 boolean picture = homecontroller.getRadioButtonPicture();
 
-                if (console) {
-                    /*stage.close();
-                    PuzzleConsole p = new PuzzleConsole(4,4);
-                    p.init();
-                    p.startGameLine();*/
-                } else if (number) {
+                if (number) {
                     int nb = 4;
                     String stringNb = homecontroller.getGridSize();
                     if (!stringNb.isBlank()) {
