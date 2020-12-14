@@ -22,8 +22,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -43,10 +41,7 @@ public class PuzzleGraphic extends Puzzle {
      */
     public PuzzleGraphic(int maxX, int maxY) {
         super(maxX, maxY);
-        this.imagePath = URLDecoder.decode(
-                MainApp.class.getResource("images/taquin.png").getPath(),
-                StandardCharsets.UTF_8
-        );
+        this.imagePath = "base";
     }
 
     /**
@@ -82,7 +77,15 @@ public class PuzzleGraphic extends Puzzle {
      * @param path Path of the image
      */
     public void initGraphicBlock(String path) throws IOException {
-        Image scaledInstance = ImageIO.read(new File(path)).getScaledInstance(
+        BufferedImage read1;
+        if (path.equals("base")) {
+            read1 = ImageIO.read(MainApp.class.getResource("images/taquin.png"));
+        }
+        else {
+            read1 = ImageIO.read(new File(path));
+        }
+
+        Image scaledInstance = read1.getScaledInstance(
                 WIDTH,
                 HEIGHT,
                 Image.SCALE_DEFAULT

@@ -45,13 +45,8 @@ public class AIAlgo implements AI {
         }
         Puzzle nxtMove = moves.removeFirst(); // Remove actual state
         nxtMove = moves.removeFirst();
-        System.out.println(nxtMove.toString());
         nextMove = nxtMove.getVoidBlock().getCurrentPos();
-        System.out.println(currentPos);
-        System.out.println(nextMove);
-        System.out.println(AIUtils.manhattanDistance(currentPos, nextMove));
         int i = AIUtils.calculateResult(currentPos, nextMove);
-        System.out.println(i);
         return i;
 
     }
